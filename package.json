@@ -1,0 +1,45 @@
+{
+  "name": "siase-api",
+  "version": "1.0.0",
+  "description": "Un rest api para consumir los datos de SIASE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node build/webapi/index.js",
+    "build": "tsc",
+    "build-w": "tsc -w",
+    "dev": "nodemon build/webapi/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GDSC-UANL/siase-api.git"
+  },
+  "author": "GDSC UANL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GDSC-UANL/siase-api/issues"
+  },
+  "homepage": "https://github.com/GDSC-UANL/siase-api#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "form-data": "^4.0.0",
+    "module-alias": "^2.2.2",
+    "morgan": "^1.10.0",
+    "ssl-root-cas": "^1.3.1",
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/cheerio": "^0.22.30",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "nodemon": "^2.0.15"
+  },
+  "imports": {
+    "#siaseApi/*": "./build/*"
+  }
+}
