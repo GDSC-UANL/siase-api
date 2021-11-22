@@ -1,4 +1,3 @@
-import 'module-alias/register';
 import { userController } from './controllers/users/userController';
 import express, { Application } from 'express';
 import cors from 'cors'
