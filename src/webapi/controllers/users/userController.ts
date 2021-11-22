@@ -2,13 +2,8 @@ import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";
 import { BaseController } from "../baseController";
 import axios, { AxiosRequestConfig } from 'axios'
-import FormData from 'form-data'
-import https from 'https'
-import cheerio from 'cheerio'
 import { userDataSource } from '../../../network/userDataSource';
 class UserController extends BaseController {
-
-    instance = axios.create();
 
     constructor() {
         super()
