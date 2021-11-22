@@ -1,9 +1,8 @@
+import 'module-alias/register';
 import { userController } from './controllers/users/userController';
 import express, { Application } from 'express';
 import cors from 'cors'
 import morgan from "morgan";
-import 'module-alias/register';
-require('https').globalAgent.options.ca = require('ssl-root-cas').create();
 
 class Server {
 

@@ -1,9 +1,11 @@
+import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";
 import { BaseController } from "../baseController";
 import axios, { AxiosRequestConfig } from 'axios'
 import FormData from 'form-data'
 import https from 'https'
 import cheerio from 'cheerio'
+import { userDataSource } from '../../../network/userDataSource';
 class UserController extends BaseController {
 
     instance = axios.create();
@@ -20,45 +22,19 @@ class UserController extends BaseController {
     async authUser(req: Request, res: Response) {
         try {
             const password = req.body.password
+
             const user = req.body.user
-            console.log(user, password)
-            const formData = new URLSearchParams()
 
-            formData.append("HTMLUsuCve", user)
-            formData.append("HTMLPassword", password)
-            formData.append("HTMLPrograma", "")
-            formData.append("HTMLTipCve", "01")
+            const loginResponse = await userDataSource.loginUser(user, password);
 
-            const response = await axios.post("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/eselcarrera.htm", formData, {
-                httpsAgent: new https.Agent({
-                    rejectUnauthorized: false
-                }),
+            const careerScrapper = new CareerScrapper(loginResponse);
 
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
+            const careers = careerScrapper.getCareersFromLoginResponse()
 
-            const $ = cheerio.load(response.data)
-
-            const form = $("form[name=SelCarrera]")
-
-            const carreras = form.first().find("a")
-
-            for (let carrera of carreras) {
-                console.log(
-                    $(carrera).text()
-
-                )
-            }
-
-
-
-
-            res.send("ASDASD")
+            res.status(200).json(careers)
         } catch (error) {
             console.error(error)
-            res.send("ERROR ")
+            res.sendStatus(500)
         }
 
     }
