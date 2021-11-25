@@ -1,3 +1,4 @@
+import { kardexController } from './controllers/kardex/kardexController';
 import { userController } from './controllers/users/userController';
 import express, { Application } from 'express';
 import cors from 'cors'
@@ -29,6 +30,7 @@ class Server {
 
         this.app.use("/api/user", userController.router)
         this.app.use("/api/schedules", scheduleController.router)
+        this.app.use("/api/kardex", kardexController.router)
         this.app.get("/", (req, res) => {
             res.send("SIASE API")
         })

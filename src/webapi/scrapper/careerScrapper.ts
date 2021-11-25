@@ -1,6 +1,4 @@
-import { ScheduleDetail, Subject } from './../../core/domain/models';
-import { CareerQuery } from './../../core/domain/queries';
-import { Carrera, Schedule } from '../../core/domain/models';
+import { HorarioDetalle, Materia, Carrera, Horario } from './../../core/domain/models';
 import { SiaseWebScrapper } from './webScrapper';
 import { val } from 'cheerio/lib/api/attributes';
 export class CareerScrapper extends SiaseWebScrapper {
@@ -33,7 +31,7 @@ export class CareerScrapper extends SiaseWebScrapper {
 
     }
 
-    getCareerSchedules(career: CareerQuery): Schedule[] {
+    getCareerSchedules(career: Carrera): Horario[] {
 
         const schedules = this.$("option")
         const resill = this.$("[name=HTMLResill]").attr("value")
@@ -41,7 +39,7 @@ export class CareerScrapper extends SiaseWebScrapper {
         if (!resill)
             throw new Error("Token expired")
 
-        const parsedSchedules: Schedule[] = []
+        const parsedSchedules: Horario[] = []
 
         for (let schedule of schedules) {
 
@@ -51,7 +49,7 @@ export class CareerScrapper extends SiaseWebScrapper {
             if (!value || value == "0")
                 continue;
 
-            parsedSchedules.push(new Schedule(career, parsedSchedule.text(), value, resill))
+            parsedSchedules.push(new Horario(career, parsedSchedule.text(), value, resill))
 
         }
 
@@ -67,9 +65,9 @@ export class CareerScrapper extends SiaseWebScrapper {
         const infoElements = infoTable.find("tr");
         const elements = scheduleTable.find(".text-center")
 
-        const scheduleDetail = new ScheduleDetail();
+        const scheduleDetail = new HorarioDetalle();
 
-        const subjects = new Map<string, Subject>();
+        const subjects = new Map<string, Materia>();
 
         for (let i = 0; i < infoElements.length; i++) {
 
@@ -77,7 +75,7 @@ export class CareerScrapper extends SiaseWebScrapper {
 
             const info = this.$(infoElements[i]);
 
-            const subject = new Subject();
+            const subject = new Materia();
 
             subject.tipo = this.$(info.children().get(SubjectValues.Tipo)).text()
             subject.grupo = this.$(info.children().get(SubjectValues.Grupo)).text()

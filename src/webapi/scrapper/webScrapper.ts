@@ -23,5 +23,6 @@ export class SiaseWebScrapper {
     loadResponse(html: string) {
         this._$ = cheerio.load(html)
     }
+    
 
 }

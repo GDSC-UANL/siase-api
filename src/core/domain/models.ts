@@ -1,5 +1,3 @@
-import { urlencoded } from "express"
-import { CareerQuery } from "./queries"
 
 export class Carrera {
     nombre: string = ""
@@ -11,18 +9,21 @@ export class Carrera {
     clavePlanEstudios: string = ""
     claveCarrera: string = ""
 
-    constructor(urlData: string, name: string) {
-        const data = urlData.split(";")
-        this.nombre = name.charAt(0) + name.slice(1).toLowerCase()
-        this.claveDependencia = this.getValue(data[CarreraValues.ClaveDependencia])
-        this.claveUnidad = this.getValue(data[CarreraValues.ClaveUnidad])
-        this.claveNivelAcademico = this.getValue(data[CarreraValues.ClaveNivelAcademico])
-        this.claveGradoAcademico = this.getValue(data[CarreraValues.ClaveGradoAcademico])
-        this.claveModalidad = this.getValue(data[CarreraValues.ClaveModalidad])
-        this.clavePlanEstudios = this.getValue(data[CarreraValues.ClavePlanEstudios])
-        this.claveCarrera = this.getValue(data[CarreraValues.ClaveCarrera])
+    constructor(urlData?: string, name?: string) {
 
+        if (urlData) {
+            const data = urlData.split(";")
+            this.claveDependencia = this.getValue(data[CarreraValues.ClaveDependencia])
+            this.claveUnidad = this.getValue(data[CarreraValues.ClaveUnidad])
+            this.claveNivelAcademico = this.getValue(data[CarreraValues.ClaveNivelAcademico])
+            this.claveGradoAcademico = this.getValue(data[CarreraValues.ClaveGradoAcademico])
+            this.claveModalidad = this.getValue(data[CarreraValues.ClaveModalidad])
+            this.clavePlanEstudios = this.getValue(data[CarreraValues.ClavePlanEstudios])
+            this.claveCarrera = this.getValue(data[CarreraValues.ClaveCarrera])
+        }
 
+        if (name)
+            this.nombre = name.charAt(0) + name.slice(1).toLowerCase()
     }
 
     private getValue(data: string) {
@@ -34,7 +35,7 @@ export class Carrera {
 
 }
 
-export class Schedule {
+export class Horario {
     nombre: string = ""
     claveDependencia: string = ""
     claveUnidad: string = ""
@@ -46,23 +47,32 @@ export class Schedule {
     periodo: string = ""
     resill: string = ""
 
-    constructor(career: CareerQuery, name: string, period: string, resill: string) {
-        const newName = name.replace("&nbsp;", " ")
-        this.nombre = newName.charAt(0) + newName.slice(1).toLowerCase();
-        this.claveCarrera = career.claveCarrera!;
-        this.claveDependencia = career.claveDependencia!;
-        this.claveGradoAcademico = career.claveGradoAcademico!;
-        this.claveModalidad = career.claveModalidad!;
-        this.claveNivelAcademico = career.claveNivelAcademico!;
-        this.claveModalidad = career.claveModalidad!;
-        this.clavePlanEstudios = career.clavePlanEstudios!;
-        this.claveUnidad = career.claveUnidad!;
-        this.periodo = period;
-        this.resill = resill;
+    constructor(career?: Carrera, name?: string, period?: string, resill?: string) {
+        if (name) {
+            const newName = name.replace("&nbsp;", " ")
+            this.nombre = newName.charAt(0) + newName.slice(1).toLowerCase();
+        }
+
+        if (career) {
+            this.claveCarrera = career.claveCarrera!;
+            this.claveDependencia = career.claveDependencia!;
+            this.claveGradoAcademico = career.claveGradoAcademico!;
+            this.claveModalidad = career.claveModalidad!;
+            this.claveNivelAcademico = career.claveNivelAcademico!;
+            this.claveModalidad = career.claveModalidad!;
+            this.clavePlanEstudios = career.clavePlanEstudios!;
+            this.claveUnidad = career.claveUnidad!;
+        }
+
+        if (period)
+            this.periodo = period;
+
+        if (resill)
+            this.resill = resill;
     }
 }
 
-export class Subject {
+export class Materia {
     nombre: string = ""
     nombreCorto = ""
     fase: string = ""
@@ -75,16 +85,18 @@ export class Subject {
     modalidad: string = ""
     oportunidad: string = ""
 
-}
-export class ScheduleDetail {
-    lunes: Subject[] = []
-    martes: Subject[] = []
-    miercoles: Subject[] = []
-    jueves: Subject[] = []
-    viernes: Subject[] = []
-    sabado: Subject[] = []
 
-    addSubject(subject: Subject, day: number) {
+
+}
+export class HorarioDetalle {
+    lunes: Materia[] = []
+    martes: Materia[] = []
+    miercoles: Materia[] = []
+    jueves: Materia[] = []
+    viernes: Materia[] = []
+    sabado: Materia[] = []
+
+    addSubject(subject: Materia, day: number) {
         switch (day) {
             case Days.Monday:
                 this.lunes.push(subject)
@@ -107,6 +119,55 @@ export class ScheduleDetail {
         }
     }
 }
+
+export class MateriaKardex {
+    semestre: number = 1;
+    claveMateria: string = "";
+    nombre: string = "";
+    calificaciones: number[] = []
+
+    setNombreFromValue(value: string) {
+        const name = value.replace(/\n/g, "")
+        this.nombre = name.charAt(0) + name.slice(1).toLowerCase()
+    }
+
+    setClaveMateriaFromValue(value: string) {
+        this.claveMateria = value.replace(/\n/g, "")
+    }
+
+    setSemestreFromvalue(value: string) {
+        this.semestre = Number.parseInt(value)
+    }
+}
+
+export class Kardex {
+    nombreAlumno: string = ""
+    carrera: string = ""
+    planEstudios: string = ""
+    materias: MateriaKardex[] = []
+
+    setNombreAlumnoFromvalue(value: string) {
+
+        const name = value.split(":").pop()!.replace(/\xA0/g, "").replace(/\n/g, "")
+
+        this.nombreAlumno = name.split(" ").map(e => e.charAt(0) + e.slice(1).toLowerCase()).join(" ")
+
+    }
+
+    setCarreraFromValue(value: string) {
+
+        const name = value.split(":").pop()!.replace(/\xA0/g, "").replace(/\n/g, "")
+
+        this.carrera = name.split(" ").map(e => e.charAt(0) + e.slice(1).toLowerCase()).join(" ")
+
+    }
+
+    setPlanEstudiosFromValue(value: string) {
+
+        this.planEstudios = value.split(":").pop()!.replace(/\xA0/g, "").replace(/\n/g, "")
+    }
+}
+
 
 enum Days {
     Monday,

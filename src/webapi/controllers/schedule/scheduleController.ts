@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { CareerQuery, ScheduleQuery } from '../../../core/domain/queries';
+import { Carrera, Horario } from '../../../core/domain/models';
 import { careerDataSource } from '../../../network/careersDatSource';
 import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { BaseController, CustomRequest } from './../baseController';
@@ -20,7 +20,7 @@ class ScheduleController extends BaseController {
     private async getSchedules(req: CustomRequest, res: Response) {
         try {
 
-            const queries = req.query as CareerQuery;
+            const queries = req.query as any as Carrera;
 
             if (!queries.claveCarrera)
                 res.status(400).send("claveCarrera missing")
@@ -43,10 +43,8 @@ class ScheduleController extends BaseController {
             if (!queries.claveUnidad)
                 res.status(400).send("claveUnidad missing")
 
-            queries.trim = req.trim;
-            queries.user = req.user;
 
-            const data = await careerDataSource.getCareerSchedules(queries);
+            const data = await careerDataSource.getCareerSchedules(queries, req.user, req.trim);
 
             const careerScrapper = new CareerScrapper(data);
 
@@ -68,7 +66,7 @@ class ScheduleController extends BaseController {
         try {
 
 
-            const queries = req.query as ScheduleQuery;
+            const queries = req.query as any as Horario;
 
             if (!queries.claveCarrera)
                 res.status(400).send("claveCarrera missing")
@@ -97,11 +95,8 @@ class ScheduleController extends BaseController {
             if (!queries.resill)
                 res.status(400).send("resill missing")
 
-            queries.trim = req.trim;
-            queries.user = req.user;
 
-
-            const data = await careerDataSource.getScheduleDetail(queries);
+            const data = await careerDataSource.getScheduleDetail(queries, req.user, req.trim);
 
             const careerScrapper = new CareerScrapper(data);
 
