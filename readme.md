@@ -16,7 +16,6 @@
 
 [![discord](https://img.shields.io/discord/761984010170794015)](https://discord.gg/ZS52h7HKKJ)
 
-<br>
 <!-- ABOUT THE PROJECT -->
 
 ## Acerca del proyecto
