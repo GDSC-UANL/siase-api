@@ -1,4 +1,5 @@
 import { urlencoded } from "express"
+import { CareerQuery } from "./queries"
 
 export class Carrera {
     nombre: string = ""
@@ -42,7 +43,7 @@ export class Schedule {
     claveModalidad: string = ""
     clavePlanEstudios: string = ""
     claveCarrera: string = ""
-    period: string = ""
+    periodo: string = ""
     resill: string = ""
 
     constructor(career: CareerQuery, name: string, period: string, resill: string) {
@@ -56,21 +57,64 @@ export class Schedule {
         this.claveModalidad = career.claveModalidad!;
         this.clavePlanEstudios = career.clavePlanEstudios!;
         this.claveUnidad = career.claveUnidad!;
-        this.period = period;
+        this.periodo = period;
         this.resill = resill;
     }
 }
 
-export interface CareerQuery extends qs.ParsedQs {
-    claveUnidad?: string;
-    clavePlanEstudios?: string;
-    claveNivelAcademico?: string;
-    claveModalidad?: string;
-    claveGradoAcademico?: string;
-    claveDependencia?: string;
-    claveCarrera?: string;
-    trim: string;
-    user: string;
+export class Subject {
+    nombre: string = ""
+    nombreCorto = ""
+    fase: string = ""
+    tipo: string = ""
+    grupo: string = ""
+    salon: string = ""
+    horaInicio: string = ""
+    horaFin: string = ""
+    claveMateria: string = ""
+    modalidad: string = ""
+    oportunidad: string = ""
+
+}
+export class ScheduleDetail {
+    lunes: Subject[] = []
+    martes: Subject[] = []
+    miercoles: Subject[] = []
+    jueves: Subject[] = []
+    viernes: Subject[] = []
+    sabado: Subject[] = []
+
+    addSubject(subject: Subject, day: number) {
+        switch (day) {
+            case Days.Monday:
+                this.lunes.push(subject)
+                break;
+            case Days.Tuesday:
+                this.martes.push(subject)
+                break;
+            case Days.Wednesday:
+                this.miercoles.push(subject)
+                break;
+            case Days.Thursday:
+                this.jueves.push(subject)
+                break;
+            case Days.Friday:
+                this.viernes.push(subject)
+                break;
+            case Days.Saturday:
+                this.sabado.push(subject)
+                break;
+        }
+    }
+}
+
+enum Days {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
 }
 
 enum CarreraValues {
@@ -82,3 +126,4 @@ enum CarreraValues {
     ClavePlanEstudios,
     ClaveCarrera,
 }
+

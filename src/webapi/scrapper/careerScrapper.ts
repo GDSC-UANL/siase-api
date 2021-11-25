@@ -1,6 +1,8 @@
-import { CareerQuery } from './../../core/domain/models';
+import { ScheduleDetail, Subject } from './../../core/domain/models';
+import { CareerQuery } from './../../core/domain/queries';
 import { Carrera, Schedule } from '../../core/domain/models';
 import { SiaseWebScrapper } from './webScrapper';
+import { val } from 'cheerio/lib/api/attributes';
 export class CareerScrapper extends SiaseWebScrapper {
 
     getCareersFromLoginResponse(): Carrera[] {
@@ -57,4 +59,98 @@ export class CareerScrapper extends SiaseWebScrapper {
 
     }
 
+    getScheduleDetail() {
+        const tables = this.$("table")
+
+        const scheduleTable = tables.first();
+        const infoTable = this.$(tables[1]);
+        console.log(infoTable)
+        const infoElements = infoTable.find("tr");
+        const elements = scheduleTable.find(".text-center")
+
+        const scheduleDetail = new ScheduleDetail();
+
+        const subjects = new Map<string, Subject>();
+
+        for (let i = 0; i < infoElements.length; i++) {
+
+            if (i == 0) continue;
+
+            const info = this.$(infoElements[i]);
+
+            const subject = new Subject();
+
+            subject.tipo = this.$(info.children().get(SubjectValues.Tipo)).text()
+            subject.grupo = this.$(info.children().get(SubjectValues.Grupo)).text()
+            subject.nombre = this.$(info.children().get(SubjectValues.Nombre)).text()
+            subject.claveMateria = this.$(info.children().get(SubjectValues.ClaveMateria)).text()
+            subject.nombreCorto = this.$(info.children().get(SubjectValues.Abreviacion)).text()
+            subject.modalidad = this.$(info.children().get(SubjectValues.TipoOferta)).text()
+            subject.oportunidad = this.$(info.children().get(SubjectValues.Oportunidad)).text()
+
+            subjects.set(subject.nombreCorto, subject)
+        }
+
+        let startTime = ""
+        let endTime = ""
+
+        let substract = 0
+
+        for (let i = 0; i < elements.length; i++) {
+            const subject = this.$(elements[i])
+
+            if (i % 7 == 0) {
+                let times = subject.html()!.split(/ *a<br> */g)
+                startTime = times.shift()?.replace(" ","")!
+                endTime = times.pop()!
+                substract++
+                continue;
+            }
+
+            const values = subject.html()!
+                .replace(/<br>/g, " / ")
+                .replace(/<b>/g, "")
+                .replace(/<\/b>/g, "")
+                .replace(/ \/ /g, "/");
+
+            if (values == "&nbsp;") continue;
+
+            const split = values.split("/")
+
+            const fase = split[SubjectItemValues.Fase]
+            const shortName = split[SubjectItemValues.NombreCorto]
+            const classroom = split[SubjectItemValues.Salon]
+
+            const currentSubject = subjects.get(shortName)!
+
+            currentSubject.fase = fase;
+            currentSubject.salon = classroom;
+            currentSubject.horaInicio = startTime;
+            currentSubject.horaFin = endTime;
+
+            scheduleDetail.addSubject(currentSubject, (i - substract) % 6)
+
+        }
+
+        return scheduleDetail;
+    }
+
+}
+
+enum SubjectItemValues {
+    Fase,
+    Tipo,
+    NombreCorto,
+    Grupo,
+    Salon
+}
+
+enum SubjectValues {
+    Tipo,
+    Grupo,
+    ClaveMateria,
+    Abreviacion,
+    TipoOferta,
+    Nombre,
+    Oportunidad,
 }
