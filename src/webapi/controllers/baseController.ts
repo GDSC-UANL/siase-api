@@ -30,12 +30,7 @@ export abstract class BaseController {
             const payload = jwt.verify(token, process.env.SECRET!) as TokenPayload;
 
             if (!payload)
-                return res.status(401).send('Unauhtorized Request');
-
-            const now = new Date().getTime();
-
-            if (now - payload.loginDate > this.HALF_HOUR)
-                return res.status(401).send('Session time exceeded');
+                return res.status(401).send('Invalid or expired token');
 
 
             req.user = payload.user;

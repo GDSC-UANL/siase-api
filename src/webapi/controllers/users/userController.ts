@@ -31,8 +31,9 @@ class UserController extends BaseController {
             const token = jwt.sign({
                 user: user,
                 trim: trim,
-                loginDate:new Date().getTime()
-            }, process.env.SECRET!)
+            }, process.env.SECRET!,{
+                expiresIn:"30m"
+            })
 
             res.status(200).json({ token, careers })
         } catch (error) {
