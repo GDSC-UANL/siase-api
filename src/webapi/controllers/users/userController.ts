@@ -1,7 +1,6 @@
 import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";
 import { BaseController } from "../baseController";
-import axios, { AxiosRequestConfig } from 'axios'
 import { userDataSource } from '../../../network/userDataSource';
 class UserController extends BaseController {
 
