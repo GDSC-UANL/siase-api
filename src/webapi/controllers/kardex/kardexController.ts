@@ -1,7 +1,7 @@
 import { KardexScrapper } from './../../scrapper/kardexScrapper';
 import { kardexDataSource } from './../../../network/kardexDataSource';
 import { Response } from "express";
-import { Carrera, Horario } from "../../../core/domain/models";
+import { Carrera } from "../../../core/domain/models";
 import { BaseController, CustomRequest } from "../baseController";
 
 class KardexController extends BaseController {

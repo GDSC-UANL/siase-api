@@ -1,6 +1,5 @@
 import { HorarioDetalle, Materia, Carrera, Horario } from './../../core/domain/models';
 import { SiaseWebScrapper } from './webScrapper';
-import { val } from 'cheerio/lib/api/attributes';
 export class CareerScrapper extends SiaseWebScrapper {
 
     getCareersFromLoginResponse(): Carrera[] {
