@@ -17,11 +17,11 @@ export class KardexScrapper extends SiaseWebScrapper {
         const subjects = kardexTable.find("tr")
         const kardexInfo = infoTable.find("tr")
 
-        const careerStudyPlan = this.$(kardexInfo.get(KardexInfoValues.CarreraPlanEstudios))
+        const careerStudyPlan = this.$(kardexInfo.get(KardexInfoValues.CarreraPlanEstudios)).find("td")
 
         kardex.setNombreAlumnoFromvalue(this.$(kardexInfo.get(KardexInfoValues.Nombre)).text())
-        kardex.setCarreraFromValue(careerStudyPlan.find("td").first().text())
-        kardex.setPlanEstudiosFromValue(careerStudyPlan.find("td").last().text())
+        kardex.setCarreraFromValue(careerStudyPlan.first().text())
+        kardex.setPlanEstudiosFromValue(careerStudyPlan.last().text())
 
         for (let i = 0; i < subjects.length; i++) {
             if (i == 0) continue

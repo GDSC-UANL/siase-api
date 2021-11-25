@@ -60,6 +60,9 @@ export class CareerScrapper extends SiaseWebScrapper {
     getScheduleDetail() {
         const tables = this.$("table")
 
+        if (tables.length == 0)
+            throw new Error("Token expired")
+
         const scheduleTable = tables.first();
         const infoTable = this.$(tables[1]);
         const infoElements = infoTable.find("tr");

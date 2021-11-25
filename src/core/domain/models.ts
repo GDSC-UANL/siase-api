@@ -154,7 +154,6 @@ export class Kardex {
     }
 
     setCarreraFromValue(value: string) {
-        console.log(value)
         const name = value.split(":").pop()!.trim()
 
         this.carrera = name.split(" ").map(e => e.charAt(0) + e.slice(1).toLowerCase()).join(" ")
