@@ -7,7 +7,7 @@ export class CareerScrapper extends SiaseWebScrapper {
 
         const form = this.$("form[name=SelCarrera]")
 
-        if (form == null)
+        if (form.length == 0)
             throw new Error("Careers not found");
 
         const carreras = form.first().find("a")
@@ -98,7 +98,7 @@ export class CareerScrapper extends SiaseWebScrapper {
 
             if (i % 7 == 0) {
                 let times = subject.html()!.split(/ *a<br> */g)
-                startTime = times.shift()?.replace(" ","")!
+                startTime = times.shift()?.replace(" ", "")!
                 endTime = times.pop()!
                 substract++
                 continue;

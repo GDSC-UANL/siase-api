@@ -31,14 +31,14 @@ class UserController extends BaseController {
             const token = jwt.sign({
                 user: user,
                 trim: trim,
-            }, process.env.SECRET!,{
-                expiresIn:"30m"
+            }, process.env.SECRET!, {
+                expiresIn: "30m"
             })
 
             res.status(200).json({ token, careers })
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
-            res.sendStatus(500)
+            res.status(500).send(error.message)
         }
 
     }

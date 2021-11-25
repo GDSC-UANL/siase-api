@@ -11,12 +11,17 @@ export class KardexScrapper extends SiaseWebScrapper {
         const infoTable = tables.first();
         const kardexTable = this.$(tables[1])
 
+        if (tables.length == 0)
+            throw new Error("Expired token")
+
         const subjects = kardexTable.find("tr")
         const kardexInfo = infoTable.find("tr")
 
-        kardex.setNombreAlumnoFromvalue(this.$(kardexInfo.children().get(KardexInfoValues.Nombre)).text())
-        kardex.setCarreraFromValue(this.$(kardexInfo.children().get(KardexInfoValues.Carrera)).text())
-        kardex.setPlanEstudiosFromValue(this.$(kardexInfo.children().get(KardexInfoValues.PlanEstudios)).text())
+        const careerStudyPlan = this.$(kardexInfo.get(KardexInfoValues.CarreraPlanEstudios))
+
+        kardex.setNombreAlumnoFromvalue(this.$(kardexInfo.get(KardexInfoValues.Nombre)).text())
+        kardex.setCarreraFromValue(careerStudyPlan.find("td").first().text())
+        kardex.setPlanEstudiosFromValue(careerStudyPlan.find("td").last().text())
 
         for (let i = 0; i < subjects.length; i++) {
             if (i == 0) continue
@@ -52,8 +57,7 @@ export class KardexScrapper extends SiaseWebScrapper {
 
 enum KardexInfoValues {
     Nombre,
-    Carrera,
-    PlanEstudios
+    CarreraPlanEstudios,
 
 }
 

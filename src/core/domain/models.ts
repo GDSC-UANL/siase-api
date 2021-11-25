@@ -49,7 +49,7 @@ export class Horario {
 
     constructor(career?: Carrera, name?: string, period?: string, resill?: string) {
         if (name) {
-            const newName = name.replace("&nbsp;", " ")
+            const newName = name.trim()
             this.nombre = newName.charAt(0) + newName.slice(1).toLowerCase();
         }
 
@@ -127,12 +127,12 @@ export class MateriaKardex {
     calificaciones: number[] = []
 
     setNombreFromValue(value: string) {
-        const name = value.replace(/\n/g, "")
+        const name = value.trim()
         this.nombre = name.charAt(0) + name.slice(1).toLowerCase()
     }
 
     setClaveMateriaFromValue(value: string) {
-        this.claveMateria = value.replace(/\n/g, "")
+        this.claveMateria = value.trim()
     }
 
     setSemestreFromvalue(value: string) {
@@ -147,24 +147,22 @@ export class Kardex {
     materias: MateriaKardex[] = []
 
     setNombreAlumnoFromvalue(value: string) {
-
-        const name = value.split(":").pop()!.replace(/\xA0/g, "").replace(/\n/g, "")
+        const name = value.split(":").pop()!.trim()
 
         this.nombreAlumno = name.split(" ").map(e => e.charAt(0) + e.slice(1).toLowerCase()).join(" ")
 
     }
 
     setCarreraFromValue(value: string) {
-
-        const name = value.split(":").pop()!.replace(/\xA0/g, "").replace(/\n/g, "")
+        console.log(value)
+        const name = value.split(":").pop()!.trim()
 
         this.carrera = name.split(" ").map(e => e.charAt(0) + e.slice(1).toLowerCase()).join(" ")
 
     }
 
     setPlanEstudiosFromValue(value: string) {
-
-        this.planEstudios = value.split(":").pop()!.replace(/\xA0/g, "").replace(/\n/g, "")
+        this.planEstudios = value.split(":").pop()!.trim();
     }
 }
 

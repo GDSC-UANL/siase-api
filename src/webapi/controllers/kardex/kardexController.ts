@@ -6,7 +6,9 @@ import { BaseController, CustomRequest } from "../baseController";
 
 class KardexController extends BaseController {
     protected config(): void {
-        this.router.get("/", this.verifyToken, (req, res) => this.getKardex(req as CustomRequest, res))
+        this.router.get("/",
+            (req, res, next) => this.verifyToken(req, res, next),
+            (req, res) => this.getKardex(req as CustomRequest, res))
     }
 
     private async getKardex(req: CustomRequest, res: Response) {
@@ -43,9 +45,9 @@ class KardexController extends BaseController {
 
             res.status(200).json(kardex)
 
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
-            res.sendStatus(500)
+            res.status(500).send(error.message)
         }
     }
 
