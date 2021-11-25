@@ -102,7 +102,7 @@ class ScheduleController extends BaseController {
 
             const detail = careerScrapper.getScheduleDetail();
 
-            res.status(200).send(detail)
+            res.status(200).json(detail)
 
         } catch (error) {
             console.error(error);

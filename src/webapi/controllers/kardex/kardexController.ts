@@ -41,7 +41,7 @@ class KardexController extends BaseController {
 
             const kardex = kardexScrapper.getKardex();
 
-            res.status(200).send(kardex)
+            res.status(200).json(kardex)
 
         } catch (error) {
             console.error(error)
