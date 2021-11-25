@@ -33,7 +33,6 @@ export abstract class BaseController {
                 return res.status(401).send('Unauhtorized Request');
 
             const now = new Date().getTime();
-            console.log(now)
 
             if (now - payload.loginDate > this.HALF_HOUR)
                 return res.status(401).send('Session time exceeded');
