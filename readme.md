@@ -23,6 +23,7 @@ SIASE API es un REST API de código abierto que utiliza webscraping para obtener
 Puedes utilizar esta API para construir cualquier proyecto que desees o contrivuir para mejorarla.
 
 SIASE API y el GDSC no estamos afiliados de ninguna manera con la UANL, este e sun proyecto hecho por y para estudiantes.
+<br>
 
 ## Errores, mejoras y contribuciones
 
@@ -62,6 +63,7 @@ Por favor asegurate de leer las guías de contribución.
 - JWT
 
 <!-- GETTING STARTED -->
+<br>
 
 ## Iniciar un servidor local de desarrollo
 Antes de clonar el repositorio asegurate de tener instalado:
@@ -84,6 +86,7 @@ Antes de clonar el repositorio asegurate de tener instalado:
 
 
 <!-- CONTACT -->
+<br>
 
 ## Contact
 
