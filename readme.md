@@ -52,6 +52,12 @@ Por favor asegurate de leer las guías de contribución.
 
 </details>
 
+<details><summary>Contribuciones</summary>
+
+Por favor mira nuestro apartado de [contribuciones](https://github.com/GDSC-UANL/siase-api/blob/master/contributing.md)
+
+</details>
+
 <br>
 
 ## Herramientas de desarrollo
