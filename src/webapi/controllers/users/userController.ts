@@ -2,6 +2,9 @@ import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";
 import { BaseController } from "../baseController";
 import { userDataSource } from '../../../network/userDataSource';
+import jwt from 'jsonwebtoken'
+import { AuthScrapper } from '../../scrapper/authScrapper';
+
 class UserController extends BaseController {
 
     constructor() {
@@ -23,9 +26,19 @@ class UserController extends BaseController {
 
             const careerScrapper = new CareerScrapper(loginResponse);
 
+            const authScrapper = new AuthScrapper(loginResponse);
+
             const careers = careerScrapper.getCareersFromLoginResponse()
 
-            res.status(200).json(careers)
+            const trim = authScrapper.getTrimFromLoginResponse();
+
+            const token = jwt.sign({
+                user: user,
+                trim: trim,
+                loginDate:new Date().getTime()
+            }, process.env.SECRET!)
+
+            res.status(200).json({ token, careers })
         } catch (error) {
             console.error(error)
             res.sendStatus(500)

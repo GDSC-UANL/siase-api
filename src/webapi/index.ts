@@ -2,6 +2,7 @@ import { userController } from './controllers/users/userController';
 import express, { Application } from 'express';
 import cors from 'cors'
 import morgan from "morgan";
+import dotenv from 'dotenv'
 
 class Server {
 
@@ -14,8 +15,8 @@ class Server {
     }
 
     private config() {
-
-        this.app.set("port", 5000)
+        dotenv.config();
+        this.app.set("port", process.env.PORT || 5000)
         this.app.use(cors())
         this.app.use(morgan('dev'));
         this.app.use(express.json())
