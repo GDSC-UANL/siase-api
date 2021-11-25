@@ -50,7 +50,7 @@ class CareerDataSource extends SiaseNetworkDataSource {
 
         const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/control.p", {
             httpsAgent: new https.Agent({
-                rejectUnauthorized: false
+                rejectUnauthorized: !(process.env.DEV == true.toString())
             }),
             params: formData,
             headers: {
