@@ -29,6 +29,9 @@ class Server {
 
         this.app.use("/api/user", userController.router)
         this.app.use("/api/schedules", scheduleController.router)
+        this.app.get("/", (req, res) => {
+            res.send("SIASE API")
+        })
 
     }
 
