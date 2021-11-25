@@ -14,6 +14,9 @@
 
 <br>
 
+[![discord](https://img.shields.io/discord/761984010170794015)](https://discord.gg/ZS52h7HKKJ)
+
+<br>
 <!-- ABOUT THE PROJECT -->
 
 ## Acerca del proyecto
@@ -75,8 +78,8 @@ Por favor mira nuestro apartado de [contribuciones](https://github.com/GDSC-UANL
 ## Iniciar un servidor local de desarrollo
 Antes de clonar el repositorio asegurate de tener instalado:
 
-- [**NODE**](https://www.google.com/search?q=how+to+install+node) (version >= 12.17.x)
-- [**NPM**](https://www.google.com/search?q=how+to+install+npm) (version >= 6.14.x)
+- NodeJS [![NodeJS](https://img.shields.io/badge/NodeJS-v14.15.6-green)](https://nodejs.org/es/)
+- NPM [![NPM](https://img.shields.io/npm/v/npm)](https://nodejs.org/es/)
 
 
 - Una vez que hayas descargado el repositorio instala las dependencias utilizando
