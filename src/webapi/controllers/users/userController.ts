@@ -7,12 +7,8 @@ import { AuthScrapper } from '../../scrapper/authScrapper';
 
 class UserController extends BaseController {
 
-    constructor() {
-        super()
-        this.config()
-    }
 
-    private config() {
+    protected config() {
         this.router.post("/", (req, res) => this.authUser(req, res))
     }
 

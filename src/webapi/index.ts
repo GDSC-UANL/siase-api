@@ -3,6 +3,7 @@ import express, { Application } from 'express';
 import cors from 'cors'
 import morgan from "morgan";
 import dotenv from 'dotenv'
+import { scheduleController } from './controllers/schedule/scheduleController';
 
 class Server {
 
@@ -27,6 +28,7 @@ class Server {
     private routes() {
 
         this.app.use("/api/user", userController.router)
+        this.app.use("/api/schedules", scheduleController.router)
 
     }
 
