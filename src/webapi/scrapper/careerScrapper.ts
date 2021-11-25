@@ -64,7 +64,6 @@ export class CareerScrapper extends SiaseWebScrapper {
 
         const scheduleTable = tables.first();
         const infoTable = this.$(tables[1]);
-        console.log(infoTable)
         const infoElements = infoTable.find("tr");
         const elements = scheduleTable.find(".text-center")
 
