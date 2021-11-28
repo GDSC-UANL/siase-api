@@ -90,6 +90,8 @@ Antes de clonar el repositorio asegurate de tener instalado:
   npm install
 ```
 
+- Crea un archivo .env en el directorio principal y llenalo con las variables necesarias. Puedes ver las variables requeridas en el archivo [EXAMPLE.env](https://github.com/GDSC-UANL/siase-api/blob/master/EXAMPLE.env).
+
 - Ejecuta el servidor utilizando
 
 ```
