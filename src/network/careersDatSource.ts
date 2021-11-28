@@ -18,9 +18,7 @@ class CareerDataSource extends SiaseNetworkDataSource {
         formData.append("HTMLTipCve", "01")
 
         const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/echalm01.htm", {
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false
-            }),
+
             params: formData,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -42,15 +40,13 @@ class CareerDataSource extends SiaseNetworkDataSource {
         formData.append("HTMLCve_Plan_Estudio", query.clavePlanEstudios!)
         formData.append("HTMLtrim", trim)
         formData.append("HTMLCve_Unidad", query.claveUnidad!)
-        formData.append("HTMLResill", query.resill!)
+        formData.append("HTMLResill", "1")
         formData.append("HTMLPeriodo", query.periodo!)
         formData.append("HTMLTrund", "echalm02")
         formData.append("HTMLTipCve", "01")
 
+
         const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/control.p", {
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: !(process.env.DEV == true.toString())
-            }),
             params: formData,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

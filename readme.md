@@ -20,11 +20,14 @@
 
 ## Acerca del proyecto
 
+* [Documentación](https://siaseapi.docs.apiary.io/#)
+
 SIASE API es un REST API de código abierto que utiliza webscraping para obtener los datos de la plataforma de SIASE de la UANL, con esta api podrás acceder a tu información como las carreras que estas cursando, los horarios e incluso consultar tu kardex.
 
 Puedes utilizar esta API para construir cualquier proyecto que desees o contribuir para mejorarla.
 
 SIASE API y el GDSC no estamos afiliados de ninguna manera con la UANL, este es un proyecto hecho por y para estudiantes.
+
 
 <br>
 

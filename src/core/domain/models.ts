@@ -45,9 +45,8 @@ export class Horario {
     clavePlanEstudios: string = ""
     claveCarrera: string = ""
     periodo: string = ""
-    resill: string = ""
 
-    constructor(career?: Carrera, name?: string, period?: string, resill?: string) {
+    constructor(career?: Carrera, name?: string, period?: string) {
         if (name) {
             const newName = name.trim()
             this.nombre = newName.charAt(0) + newName.slice(1).toLowerCase();
@@ -67,8 +66,6 @@ export class Horario {
         if (period)
             this.periodo = period;
 
-        if (resill)
-            this.resill = resill;
     }
 }
 

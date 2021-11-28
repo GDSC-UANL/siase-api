@@ -12,10 +12,6 @@ class UserDataSource extends SiaseNetworkDataSource {
         formData.append("HTMLTipCve", "01")
 
         const response = await this.axios.post("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/eselcarrera.htm", formData, {
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false
-            }),
-
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }

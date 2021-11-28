@@ -48,7 +48,7 @@ export class CareerScrapper extends SiaseWebScrapper {
             if (!value || value == "0")
                 continue;
 
-            parsedSchedules.push(new Horario(career, parsedSchedule.text(), value, resill))
+            parsedSchedules.push(new Horario(career, parsedSchedule.text(), value))
 
         }
 
