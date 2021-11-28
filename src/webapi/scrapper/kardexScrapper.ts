@@ -3,7 +3,7 @@ import { SiaseWebScrapper } from './webScrapper';
 
 export class KardexScrapper extends SiaseWebScrapper {
 
-    getKardex(): Kardex {
+    getKardex(): Kardex | null {
         const kardex = new Kardex();
 
         const tables = this.$("table")
@@ -12,7 +12,7 @@ export class KardexScrapper extends SiaseWebScrapper {
         const kardexTable = this.$(tables[1])
 
         if (tables.length == 0)
-            throw new Error("Expired token")
+            return null
 
         const subjects = kardexTable.find("tr")
         const kardexInfo = infoTable.find("tr")

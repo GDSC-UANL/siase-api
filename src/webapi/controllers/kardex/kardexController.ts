@@ -43,10 +43,19 @@ class KardexController extends BaseController {
 
             const kardex = kardexScrapper.getKardex();
 
+            if (!kardex)
+                return res.sendStatus(404)
+
             res.status(200).json(kardex)
 
         } catch (error: any) {
             console.error(error)
+
+            if(error instanceof AxiosError){
+                return res.status(503).send("SIASE no funciona")
+
+            }
+
             res.status(500).send(error.message)
         }
     }

@@ -50,6 +50,9 @@ class ScheduleController extends BaseController {
 
             const schedules = careerScrapper.getCareerSchedules(queries);
 
+            if (!schedules)
+                return res.sendStatus(404)
+
             res.status(200).json(schedules)
 
         } catch (error: any) {
@@ -101,6 +104,9 @@ class ScheduleController extends BaseController {
             const careerScrapper = new CareerScrapper(data);
 
             const detail = careerScrapper.getScheduleDetail();
+
+            if (!detail)
+                return res.sendStatus(404)
 
             res.status(200).json(detail)
 

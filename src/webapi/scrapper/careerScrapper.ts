@@ -2,12 +2,12 @@ import { HorarioDetalle, Materia, Carrera, Horario } from './../../core/domain/m
 import { SiaseWebScrapper } from './webScrapper';
 export class CareerScrapper extends SiaseWebScrapper {
 
-    getCareersFromLoginResponse(): Carrera[] {
+    getCareersFromLoginResponse(): Carrera[] | null {
 
         const form = this.$("form[name=SelCarrera]")
 
         if (form.length == 0)
-            throw new Error("Careers not found");
+            return null
 
         const carreras = form.first().find("a")
 
@@ -30,13 +30,13 @@ export class CareerScrapper extends SiaseWebScrapper {
 
     }
 
-    getCareerSchedules(career: Carrera): Horario[] {
+    getCareerSchedules(career: Carrera): Horario[] | null {
 
         const schedules = this.$("option")
         const resill = this.$("[name=HTMLResill]").attr("value")
 
         if (!resill)
-            throw new Error("Token expired")
+            return null
 
         const parsedSchedules: Horario[] = []
 
@@ -60,7 +60,7 @@ export class CareerScrapper extends SiaseWebScrapper {
         const tables = this.$("table")
 
         if (tables.length == 0)
-            throw new Error("Token expired")
+            return null
 
         const scheduleTable = tables.first();
         const infoTable = this.$(tables[1]);
