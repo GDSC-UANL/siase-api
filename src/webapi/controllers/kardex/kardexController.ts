@@ -3,7 +3,7 @@ import { kardexDataSource } from './../../../network/kardexDataSource';
 import { Response } from "express";
 import { Carrera } from "../../../core/domain/models";
 import { BaseController, CustomRequest } from "../baseController";
-
+import axios from 'axios'
 class KardexController extends BaseController {
     protected config(): void {
         this.router.get("/",
@@ -51,10 +51,10 @@ class KardexController extends BaseController {
         } catch (error: any) {
             console.error(error)
 
-            if(error instanceof AxiosError){
+            if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
 
-            }
+
 
             res.status(500).send(error.message)
         }
