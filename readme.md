@@ -26,6 +26,8 @@ Puedes utilizar esta API para construir cualquier proyecto que desees o contribu
 
 SIASE API y el GDSC no estamos afiliados de ninguna manera con la UANL, este es un proyecto hecho por y para estudiantes.
 
+[Documentación](https://siaseapi.docs.apiary.io/#)
+
 <br>
 
 ## Errores, mejoras y contribuciones
