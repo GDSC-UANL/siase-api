@@ -4,6 +4,7 @@ import { BaseController } from "../baseController";
 import { userDataSource } from '../../../network/userDataSource';
 import jwt from 'jsonwebtoken'
 import { AuthScrapper } from '../../scrapper/authScrapper';
+import axios from 'axios';
 
 class UserController extends BaseController {
 
@@ -38,6 +39,10 @@ class UserController extends BaseController {
             res.status(200).json({ token, careers })
         } catch (error: any) {
             console.error(error)
+            
+            if (axios.isAxiosError(error))
+                return res.status(503).send("SIASE no funciona")
+
             res.status(500).send(error.message)
         }
 

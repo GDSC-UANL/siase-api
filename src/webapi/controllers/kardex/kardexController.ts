@@ -54,8 +54,6 @@ class KardexController extends BaseController {
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
 
-
-
             res.status(500).send(error.message)
         }
     }

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Response } from 'express';
 import { Carrera, Horario } from '../../../core/domain/models';
 import { careerDataSource } from '../../../network/careersDatSource';
@@ -58,6 +59,10 @@ class ScheduleController extends BaseController {
         } catch (error: any) {
 
             console.error(error);
+
+            if (axios.isAxiosError(error))
+                return res.status(503).send("SIASE no funciona")
+
             res.status(500).send(error.message)
 
         }
@@ -95,9 +100,6 @@ class ScheduleController extends BaseController {
             if (!queries.periodo)
                 res.status(400).send("periodo missing")
 
- 
-
-
             const data = await careerDataSource.getScheduleDetail(queries, req.user, req.trim);
 
             const careerScrapper = new CareerScrapper(data);
@@ -111,6 +113,10 @@ class ScheduleController extends BaseController {
 
         } catch (error) {
             console.error(error);
+
+            if (axios.isAxiosError(error))
+                return res.status(503).send("SIASE no funciona")
+
             res.sendStatus(500);
         }
 
