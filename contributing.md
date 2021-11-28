@@ -6,7 +6,7 @@ Gracias por tu interés en contribuir a la SIASE API
 
 ¡Los Pull Requests son bienvenidos!
 
-Si estás interesado en resolver un [issue abierto](https://github.com/GDSC-UANL/siase-api/issues) asegúrate de comentar en la publicción para que otros estén enterados.
+Si estás interesado en resolver un [issue abierto](https://github.com/GDSC-UANL/siase-api/issues) asegúrate de comentar en la publicaión para que otros estén enterados.
 
 <br>
 
