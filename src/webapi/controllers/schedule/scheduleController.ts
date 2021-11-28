@@ -92,8 +92,7 @@ class ScheduleController extends BaseController {
             if (!queries.periodo)
                 res.status(400).send("periodo missing")
 
-            if (!queries.resill)
-                res.status(400).send("resill missing")
+ 
 
 
             const data = await careerDataSource.getScheduleDetail(queries, req.user, req.trim);
