@@ -5,6 +5,10 @@ import cors from 'cors'
 import morgan from "morgan";
 import dotenv from 'dotenv'
 import { scheduleController } from './controllers/schedule/scheduleController';
+import fs from 'fs'
+import https from 'https'
+
+const CERT_PATH = './node_modules/node_extra_ca_certs_mozilla_bundle/ca_bundle/ca_intermediate_root_bundle.pem'
 
 class Server {
 
@@ -17,6 +21,7 @@ class Server {
     }
 
     private config() {
+        https.globalAgent.options.ca = fs.readFileSync(CERT_PATH);
         dotenv.config();
         this.app.set("port", process.env.PORT || 5000)
         this.app.use(cors())
