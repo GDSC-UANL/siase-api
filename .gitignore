@@ -1,3 +1,8 @@
-build/
+build/core
+build/network
+build/webapi/index.js
+build/webapi/controllers
+build/webapi/models
+build/webapi/scrapper
 node_modules/
 .env
