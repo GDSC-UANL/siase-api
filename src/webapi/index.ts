@@ -9,6 +9,7 @@ import fs from 'fs'
 import https from 'https'
 
 const CERT_PATH = './node_modules/node_extra_ca_certs_mozilla_bundle/ca_bundle/ca_intermediate_root_bundle.pem'
+const path = require('path');
 
 class Server {
 
@@ -39,7 +40,9 @@ class Server {
         this.app.get("/", (req, res) => {
             res.send("SIASE API")
         })
-
+        this.app.get("/api", (req,res) => {
+            res.sendFile(path.join(__dirname+'/views/landing/index.html'));
+        })
     }
 
     start() {
