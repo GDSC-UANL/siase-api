@@ -65,14 +65,53 @@ Por favor mira nuestro apartado de [contribuciones](https://github.com/GDSC-UANL
 
 <br>
 
-## Herramientas de desarrollo
+## 💻 Herramientas de desarrollo
 
-- NodeJS
-- TypeScript
-- Express
-- Cheerio
-- Axios
-- JWT
+<!-- Herramientas de desarrollo -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://nodejs.org">
+            <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" width="100;" alt="NodeJS"/>
+            <br />
+            <sub><b>NodeJS</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://www.typescriptlang.org/">
+            <img src="https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg" width="100;" alt="TypeScript"/>
+            <br />
+            <sub><b>TypeScript</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://expressjs.com/">
+            <img src="https://www.vectorlogo.zone/logos/expressjs/expressjs-icon.svg" width="100;" alt="Express"/>
+            <br />
+            <sub><b>Express</b></sub>
+        </a>
+    </td>
+    <td align="center" style="line-height: 8;">
+        <a href="https://cheerio.js.org/">
+            <b>Cheerio</b>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://expressjs.com/">
+            <img src="https://axios-http.com/assets/logo.svg" width="100;" height="94;" alt="Axios"/>
+            <br />
+            <sub><b>Axios</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://expressjs.com/">
+            <img src="https://jwt.io/img/pic_logo.svg" width="100;" alt="JWT"/>
+            <br />
+            <sub><b>JWT</b></sub>
+        </a>
+    </td>
+  </tr>
+</table>
 
 <!-- GETTING STARTED -->
 <br>
@@ -98,6 +137,40 @@ Antes de clonar el repositorio asegurate de tener instalado:
   npm run build && npm run start
 ```
 
+## ✍ Colaboradores
+<!-- COLABORADORES -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/Fmaldonado6">
+            <img src="https://avatars.githubusercontent.com/u/28517542?v=4" width="100;" alt="Fmaldonado6"/>
+            <br />
+            <sub><b>Fmaldonado6</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/David-Lazaro-Fernandez">
+            <img src="https://avatars.githubusercontent.com/u/57787993?v=4" width="100;" alt="David-Lazaro-Fernandez"/>
+            <br />
+            <sub><b>David-Lazaro-Fernandez</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/FabianCruz-0">
+            <img src="https://avatars.githubusercontent.com/u/6200135?v=4" width="100;" alt="FabianCruz-0"/>
+            <br />
+            <sub><b>FabianCruz-0</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/rtrevinnoc">
+            <img src="https://avatars.githubusercontent.com/u/7103315?v=4" width="100;" alt="rtrevinnoc"/>
+            <br />
+            <sub><b>rtrevinnoc</b></sub>
+        </a>
+    </td>
+  </tr>
+</table>
 
 <!-- CONTACT -->
 <br>
