@@ -32,6 +32,7 @@ class UserController extends BaseController {
             const token = jwt.sign({
                 user: user,
                 trim: trim,
+		careers: careers,
             }, process.env.SECRET!, {
                 expiresIn: "30m"
             })
