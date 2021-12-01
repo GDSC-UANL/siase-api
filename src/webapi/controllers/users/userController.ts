@@ -1,6 +1,6 @@
 import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";
-import { BaseController } from "../baseController";
+import { BaseController, CustomRequest } from "../baseController";
 import { userDataSource } from '../../../network/userDataSource';
 import jwt from 'jsonwebtoken'
 import { AuthScrapper } from '../../scrapper/authScrapper';
@@ -10,6 +10,10 @@ class UserController extends BaseController {
 
 
     protected config() {
+        this.router.get("/",
+            (req, res, next) => this.verifyToken(req, res, next),
+            (req, res) => this.getUser(req as CustomRequest, res))
+
         this.router.post("/", (req, res) => this.authUser(req, res))
     }
 
@@ -47,6 +51,21 @@ class UserController extends BaseController {
             res.status(500).send(error.message)
         }
 
+    }
+
+    async getUser(req: CustomRequest, res: Response) {
+        try {
+
+	    res.status(200).json({ "user": req.user, "careers": req.careers })
+
+        } catch (error: any) {
+            console.error(error)
+
+            if (axios.isAxiosError(error))
+                return res.status(503).send("SIASE no funciona")
+
+            res.status(500).send(error.message)
+        }
     }
 
 }
