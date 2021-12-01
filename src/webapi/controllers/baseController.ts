@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 export interface CustomRequest extends Request {
     user: string;
     trim: string;
-    careers: object;
+    careers: object[];
 }
 export abstract class BaseController {
     private HALF_HOUR = 30 * 1000 * 60;
