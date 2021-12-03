@@ -1,14 +1,14 @@
 import { TokenPayload } from './../models/models';
 import { Request, Router } from "express";
 import jwt from 'jsonwebtoken';
+import { Carrera } from '../../core/domain/models';
 
 export interface CustomRequest extends Request {
     user: string;
     trim: string;
-    careers: object[];
+    careers: Carrera[];
 }
 export abstract class BaseController {
-    private HALF_HOUR = 30 * 1000 * 60;
 
     router: Router = Router();
 

@@ -14,38 +14,38 @@ class KardexController extends BaseController {
     private async getKardex(req: CustomRequest, res: Response) {
         try {
 
-	    const queries = req.query as any
+            const queries = req.query as any
 
             if (!queries.opcion)
                 res.status(400).send("Opcion missing")
 
-	    const opcion = queries.opcion as number
+            const opcion = queries.opcion as number
 
-	    if (opcion >= req.careers.length)
-		return res.status(400).send("Opcion is out of bounds")
+            if (opcion >= req.careers.length)
+                return res.status(400).send("Opcion is out of bounds")
 
-	    const carrera = req.careers[opcion] as Carrera
+            const carrera = req.careers[opcion] as Carrera
 
-	    if (!carrera.claveCarrera)
-		res.status(400).send("claveCarrera unavailable")
+            if (!carrera.claveCarrera)
+                res.status(400).send("claveCarrera unavailable")
 
-	    if (!carrera.claveDependencia)
-		res.status(400).send("claveDependencia unavailable")
+            if (!carrera.claveDependencia)
+                res.status(400).send("claveDependencia unavailable")
 
-	    if (!carrera.claveGradoAcademico)
-		res.status(400).send("claveGradoAcademico unavailable")
+            if (!carrera.claveGradoAcademico)
+                res.status(400).send("claveGradoAcademico unavailable")
 
-	    if (!carrera.claveModalidad)
-		res.status(400).send("claveModalidad unavailable")
+            if (!carrera.claveModalidad)
+                res.status(400).send("claveModalidad unavailable")
 
-	    if (!carrera.claveNivelAcademico)
-		res.status(400).send("claveNivelAcademico unavailable")
+            if (!carrera.claveNivelAcademico)
+                res.status(400).send("claveNivelAcademico unavailable")
 
-	    if (!carrera.clavePlanEstudios)
-		res.status(400).send("clavePlanEstudios unavailable")
+            if (!carrera.clavePlanEstudios)
+                res.status(400).send("clavePlanEstudios unavailable")
 
-	    if (!carrera.claveUnidad)
-		res.status(400).send("claveUnidad unavailable")
+            if (!carrera.claveUnidad)
+                res.status(400).send("claveUnidad unavailable")
 
             const data = await kardexDataSource.getKardexResponse(carrera, req.user, req.trim);
 
