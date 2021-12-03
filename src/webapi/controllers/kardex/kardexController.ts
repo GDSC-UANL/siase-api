@@ -14,30 +14,40 @@ class KardexController extends BaseController {
     private async getKardex(req: CustomRequest, res: Response) {
         try {
 
-            const queries = req.query as any as Carrera
+	    const queries = req.query as any
 
-            if (!queries.claveCarrera)
-                res.status(400).send("claveCarrera missing")
+            if (!queries.opcion)
+                res.status(400).send("Opcion missing")
 
-            if (!queries.claveDependencia)
-                res.status(400).send("claveDependencia missing")
+	    const opcion = queries.opcion as number
 
-            if (!queries.claveGradoAcademico)
-                res.status(400).send("claveGradoAcademico missing")
+	    if (opcion >= req.careers.length)
+		return res.status(400).send("Opcion is out of bounds")
 
-            if (!queries.claveModalidad)
-                res.status(400).send("claveModalidad missing")
+	    const carrera = req.careers[opcion] as Carrera
 
-            if (!queries.claveNivelAcademico)
-                res.status(400).send("claveNivelAcademico missing")
+	    if (!carrera.claveCarrera)
+		res.status(400).send("claveCarrera unavailable")
 
-            if (!queries.clavePlanEstudios)
-                res.status(400).send("clavePlanEstudios missing")
+	    if (!carrera.claveDependencia)
+		res.status(400).send("claveDependencia unavailable")
 
-            if (!queries.claveUnidad)
-                res.status(400).send("claveUnidad missing")
+	    if (!carrera.claveGradoAcademico)
+		res.status(400).send("claveGradoAcademico unavailable")
 
-            const data = await kardexDataSource.getKardexResponse(queries, req.user, req.trim);
+	    if (!carrera.claveModalidad)
+		res.status(400).send("claveModalidad unavailable")
+
+	    if (!carrera.claveNivelAcademico)
+		res.status(400).send("claveNivelAcademico unavailable")
+
+	    if (!carrera.clavePlanEstudios)
+		res.status(400).send("clavePlanEstudios unavailable")
+
+	    if (!carrera.claveUnidad)
+		res.status(400).send("claveUnidad unavailable")
+
+            const data = await kardexDataSource.getKardexResponse(carrera, req.user, req.trim);
 
             const kardexScrapper = new KardexScrapper(data)
 
