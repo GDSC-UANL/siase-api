@@ -120,7 +120,7 @@ export class CareerScrapper extends SiaseWebScrapper {
             const shortName = split[SubjectItemValues.NombreCorto]
             const classroom = split[SubjectItemValues.Salon]
 
-            const currentSubject = subjects.get(shortName)!
+            const currentSubject = {...subjects.get(shortName)!}
 
             currentSubject.fase = fase;
             currentSubject.salon = classroom;
