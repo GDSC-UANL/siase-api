@@ -20,6 +20,8 @@ export abstract class BaseController {
 
     async verifyToken(req: any, res: any, next: any) {
         try {
+            res.setHeader("Content-Type", "application/json; charset=utf-8");
+
             if (!req.headers.authorization)
                 return res.status(401).send('Unauhtorized Request');
 
