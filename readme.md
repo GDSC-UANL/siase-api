@@ -157,7 +157,7 @@ Antes de clonar el repositorio asegurate de tener instalado:
     </td>
     <td align="center">
         <a href="https://github.com/FabianCruz-0">
-            <img src="https://avatars.githubusercontent.com/u/6200135?v=4" width="100;" alt="FabianCruz-0"/>
+            <img src="https://avatars.githubusercontent.com/u/57044771?v=4" width="100;" alt="FabianCruz-0"/>
             <br />
             <sub><b>FabianCruz-0</b></sub>
         </a>
