@@ -1,6 +1,7 @@
 import { Carrera, Horario } from './../core/domain/models';
 import { SiaseNetworkDataSource } from "./siaseNetworkDataSource";
 import https from 'https'
+import iconv from 'iconv-lite'
 class CareerDataSource extends SiaseNetworkDataSource {
 
     async getCareerSchedules(query: Carrera, user: string, trim: string): Promise<string> {
@@ -18,14 +19,11 @@ class CareerDataSource extends SiaseNetworkDataSource {
         formData.append("HTMLTipCve", "01")
 
         const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/echalm01.htm", {
-
-            params: formData,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
+            params: formData
         })
 
-        return response.data;
+
+        return response.data
     }
 
     async getScheduleDetail(query: Horario, user: string, trim: string): Promise<string> {
@@ -47,10 +45,7 @@ class CareerDataSource extends SiaseNetworkDataSource {
 
 
         const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/control.p", {
-            params: formData,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
+            params: formData
         })
 
         return response.data;

@@ -1,13 +1,15 @@
 import { TokenPayload } from './../models/models';
 import { Request, Router } from "express";
 import jwt from 'jsonwebtoken';
+import { Carrera } from '../../core/domain/models';
 
-export interface CustomRequest extends Request {
+export interface CustomRequest extends Request<any> {
     user: string;
     trim: string;
+    careers: Carrera[];
+    
 }
 export abstract class BaseController {
-    private HALF_HOUR = 30 * 1000 * 60;
 
     router: Router = Router();
 
@@ -19,6 +21,8 @@ export abstract class BaseController {
 
     async verifyToken(req: any, res: any, next: any) {
         try {
+            res.setHeader("Content-Type", "application/json; charset=utf-8");
+
             if (!req.headers.authorization)
                 return res.status(401).send('Unauhtorized Request');
 
@@ -35,6 +39,7 @@ export abstract class BaseController {
 
             req.user = payload.user;
             req.trim = payload.trim;
+            req.careers = payload.careers;
 
             next();
 

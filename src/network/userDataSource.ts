@@ -1,5 +1,7 @@
 import { SiaseNetworkDataSource } from './siaseNetworkDataSource';
 import https from 'https'
+import iconv from 'iconv-lite'
+
 class UserDataSource extends SiaseNetworkDataSource {
 
     async loginUser(user: string, password: string): Promise<string> {
@@ -11,13 +13,10 @@ class UserDataSource extends SiaseNetworkDataSource {
         formData.append("HTMLPrograma", "")
         formData.append("HTMLTipCve", "01")
 
-        const response = await this.axios.post("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/eselcarrera.htm", formData, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
+        const response = await this.axios.post("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/eselcarrera.htm", formData)
 
-        return response.data;
+
+        return response.data
 
     }
 }
