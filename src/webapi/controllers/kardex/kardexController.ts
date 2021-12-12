@@ -10,7 +10,7 @@ class KardexController extends BaseController {
             (req, res, next) => this.verifyToken(req, res, next),
             (req, res) => this.getKardex(req as CustomRequest, res))
 
-        this.router.get("/:id",
+        this.router.get("/:index",
             (req, res, next) => this.verifyToken(req, res, next),
             (req, res) => this.getKardexByIndex(req as CustomRequest, res))
     }
