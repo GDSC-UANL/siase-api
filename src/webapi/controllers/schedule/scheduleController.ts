@@ -16,6 +16,57 @@ class ScheduleController extends BaseController {
             (req, res, next) => this.verifyToken(req, res, next),
             (req, res) => this.getScheduleDetail(req as CustomRequest, res)
         );
+
+        this.router.get("/:index",
+            (req, res, next) => this.verifyToken(req, res, next),
+            (req, res) => this.getSchedulesByIndex(req as CustomRequest, res)
+        );
+
+        this.router.get("/:index/:periodo",
+            (req, res, next) => this.verifyToken(req, res, next),
+            (req, res) => this.getScheduleDetailByIndex(req as CustomRequest, res)
+        );
+    }
+
+    private async getSchedulesByIndex(req: CustomRequest, res: Response) {
+
+        try {
+
+            const index = req.params.index;
+
+            if (!Number.parseInt(index))
+                return res.status(400).send("Invalid index")
+
+            if (!index)
+                return res.status(400).send("Index missing")
+
+            if (index < 0 || index >= req.careers.length)
+                return res.status(400).send("Index out of bounds")
+
+            const career = req.careers[index]
+
+            const data = await careerDataSource.getCareerSchedules(career, req.user, req.trim);
+
+            const careerScrapper = new CareerScrapper(data);
+
+            const schedules = careerScrapper.getCareerSchedules(career);
+
+            if (!schedules)
+                return res.sendStatus(404)
+
+            res.status(200).json(schedules)
+
+        } catch (error: any) {
+
+            console.error(error);
+
+            if (axios.isAxiosError(error))
+                return res.status(503).send("SIASE no funciona")
+
+            res.status(500).send(error.message)
+
+        }
+
     }
 
     private async getSchedules(req: CustomRequest, res: Response) {
@@ -65,6 +116,52 @@ class ScheduleController extends BaseController {
 
             res.status(500).send(error.message)
 
+        }
+
+    }
+
+    private async getScheduleDetailByIndex(req: CustomRequest, res: Response) {
+
+        try {
+
+            const index = req.params.index;
+
+            if (!Number.parseInt(index))
+                return res.status(400).send("Invalid index")
+
+            if (!index)
+                return res.status(400).send("Index missing")
+
+            if (index < 0 || index >= req.careers.length)
+                return res.status(400).send("Index out of bounds")
+
+            const periodo = req.params.periodo
+
+            if (!periodo)
+                return res.status(400).send("Periodo missing")
+
+            const horario = { ...req.careers[index] } as Horario
+
+            horario.periodo = periodo
+
+            const data = await careerDataSource.getScheduleDetail(horario, req.user, req.trim);
+
+            const careerScrapper = new CareerScrapper(data);
+
+            const detail = careerScrapper.getScheduleDetail();
+
+            if (!detail)
+                return res.sendStatus(404)
+
+            res.status(200).json(detail)
+
+        } catch (error) {
+            console.error(error);
+
+            if (axios.isAxiosError(error))
+                return res.status(503).send("SIASE no funciona")
+
+            res.sendStatus(500);
         }
 
     }

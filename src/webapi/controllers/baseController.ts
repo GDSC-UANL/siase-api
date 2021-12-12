@@ -3,10 +3,11 @@ import { Request, Router } from "express";
 import jwt from 'jsonwebtoken';
 import { Carrera } from '../../core/domain/models';
 
-export interface CustomRequest extends Request {
+export interface CustomRequest extends Request<any> {
     user: string;
     trim: string;
     careers: Carrera[];
+    
 }
 export abstract class BaseController {
 
