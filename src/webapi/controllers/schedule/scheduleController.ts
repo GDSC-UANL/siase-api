@@ -37,7 +37,7 @@ class ScheduleController extends BaseController {
             if (!Number.parseInt(index))
                 return res.status(400).send("Invalid index")
 
-            if (!index)
+            if (index == null)
                 return res.status(400).send("Index missing")
 
             if (index < 0 || index >= req.careers.length)
@@ -129,7 +129,7 @@ class ScheduleController extends BaseController {
             if (!Number.parseInt(index))
                 return res.status(400).send("Invalid index")
 
-            if (!index)
+            if (index == null)
                 return res.status(400).send("Index missing")
 
             if (index < 0 || index >= req.careers.length)
