@@ -65,13 +65,12 @@ class KardexController extends BaseController {
     private async getKardexByIndex(req: CustomRequest, res: Response) {
         try {
 
-            const index = req.params.index
+            const rawIndex = req.params.index
 
-            if (!Number.parseInt(index))
+            const index = Number.parseInt(rawIndex)
+
+            if (Number.isNaN(index))
                 return res.status(400).send("Invalid index")
-
-            if (index == null)
-                return res.status(400).send("Index missing")
 
             if (index < 0 || index >= req.careers.length)
                 return res.status(400).send("Index out of bounds")
