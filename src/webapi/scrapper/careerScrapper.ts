@@ -37,8 +37,9 @@ export class CareerScrapper extends SiaseWebScrapper {
         const profilePicture = this.$(images[1]).attr("src")
 
         const userData = this.$(".style1")
+        if (userData.text() == "") return null
 
-        const userInfo = new InformacionAlumno(userData.text(),profilePicture)
+        const userInfo = new InformacionAlumno(userData.text(), profilePicture)
 
         return userInfo;
     }

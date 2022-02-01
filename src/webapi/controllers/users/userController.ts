@@ -54,10 +54,11 @@ class UserController extends BaseController {
             })
 
             res.status(200).json({
+                nombre: userInfo?.nombre,
+                matricula: user,
+                carreras:careers,
                 token,
-                careers,
-                name: userInfo?.nombre,
-                picture: userInfo?.foto,
+                foto: userInfo?.foto,
             })
         } catch (error: any) {
             console.error(error)
@@ -74,10 +75,10 @@ class UserController extends BaseController {
         try {
 
             res.status(200).json({
-                name: req.name,
-                user: req.user,
-                careers: req.careers,
-                picture: req.picture,
+                nombre: req.name,
+                matricula: req.user,
+                carreras: req.careers,
+                foto: req.picture,
             })
 
         } catch (error: any) {

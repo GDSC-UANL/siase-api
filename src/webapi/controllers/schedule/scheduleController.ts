@@ -51,7 +51,7 @@ class ScheduleController extends BaseController {
             const schedules = careerScrapper.getCareerSchedules(career);
 
             if (!schedules)
-                return res.sendStatus(404)
+                return res.status(400).send("An error has ocurred while gathering the information, make sure the token is still valid");
 
             res.status(200).json(schedules)
 
@@ -74,25 +74,25 @@ class ScheduleController extends BaseController {
             const queries = req.query as any as Carrera;
 
             if (!queries.claveCarrera)
-                res.status(400).send("claveCarrera missing")
+                return res.status(400).send("claveCarrera missing")
 
             if (!queries.claveDependencia)
-                res.status(400).send("claveDependencia missing")
+                return res.status(400).send("claveDependencia missing")
 
             if (!queries.claveGradoAcademico)
-                res.status(400).send("claveGradoAcademico missing")
+                return res.status(400).send("claveGradoAcademico missing")
 
             if (!queries.claveModalidad)
-                res.status(400).send("claveModalidad missing")
+                return res.status(400).send("claveModalidad missing")
 
             if (!queries.claveNivelAcademico)
-                res.status(400).send("claveNivelAcademico missing")
+                return res.status(400).send("claveNivelAcademico missing")
 
             if (!queries.clavePlanEstudios)
-                res.status(400).send("clavePlanEstudios missing")
+                return res.status(400).send("clavePlanEstudios missing")
 
             if (!queries.claveUnidad)
-                res.status(400).send("claveUnidad missing")
+                return res.status(400).send("claveUnidad missing")
 
 
             const data = await careerDataSource.getCareerSchedules(queries, req.user, req.trim);
@@ -102,7 +102,7 @@ class ScheduleController extends BaseController {
             const schedules = careerScrapper.getCareerSchedules(queries);
 
             if (!schedules)
-                return res.sendStatus(404)
+                return res.status(400).send("An error has ocurred while gathering the information, make sure the token is still valid");
 
             res.status(200).json(schedules)
 
@@ -152,7 +152,7 @@ class ScheduleController extends BaseController {
             const detail = careerScrapper.getScheduleDetail();
 
             if (!detail)
-                return res.sendStatus(404)
+                return res.status(400).send("An error has ocurred while gathering the information, make sure the token is still valid");
 
             res.status(200).json(detail)
 
@@ -205,7 +205,7 @@ class ScheduleController extends BaseController {
             const detail = careerScrapper.getScheduleDetail();
 
             if (!detail)
-                return res.sendStatus(404)
+                return res.status(400).send("An error has ocurred while gathering the information, make sure the token is still valid");
 
             res.status(200).json(detail)
 
