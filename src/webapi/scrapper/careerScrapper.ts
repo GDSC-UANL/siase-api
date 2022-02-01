@@ -1,4 +1,4 @@
-import { HorarioDetalle, Materia, Carrera, Horario } from './../../core/domain/models';
+import { HorarioDetalle, Materia, Carrera, Horario, InformacionAlumno } from './../../core/domain/models';
 import { SiaseWebScrapper } from './webScrapper';
 export class CareerScrapper extends SiaseWebScrapper {
 
@@ -28,6 +28,19 @@ export class CareerScrapper extends SiaseWebScrapper {
 
         return parsedCarreras;
 
+    }
+
+    getStudentInfo(): InformacionAlumno | null {
+
+        const images = this.$("img")
+
+        const profilePicture = this.$(images[1]).attr("src")
+
+        const userData = this.$(".style1")
+
+        const userInfo = new InformacionAlumno(userData.text(),profilePicture)
+
+        return userInfo;
     }
 
     getCareerSchedules(career: Carrera): Horario[] | null {
@@ -120,7 +133,7 @@ export class CareerScrapper extends SiaseWebScrapper {
             const shortName = split[SubjectItemValues.NombreCorto]
             const classroom = split[SubjectItemValues.Salon]
 
-            const currentSubject = {...subjects.get(shortName)!}
+            const currentSubject = { ...subjects.get(shortName)! }
 
             currentSubject.fase = fase;
             currentSubject.salon = classroom;

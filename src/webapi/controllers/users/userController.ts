@@ -1,3 +1,5 @@
+import { InformacionAlumno } from './../../../core/domain/models';
+import { careerDataSource } from './../../../network/careersDataSource';
 import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";
 import { BaseController, CustomRequest } from "../baseController";
@@ -33,18 +35,33 @@ class UserController extends BaseController {
 
             const trim = authScrapper.getTrimFromLoginResponse();
 
+            let userInfo: InformacionAlumno | null = null;
+
+            if (careers != null && careers[0] != null) {
+                const userInfoResponse = await careerDataSource.getUserInfoResponse(careers[0], user, trim!);
+                careerScrapper.loadResponse(userInfoResponse);
+                userInfo = careerScrapper.getStudentInfo();
+            }
+
             const token = jwt.sign({
                 user: user,
+                name: userInfo?.nombre,
+                picture: userInfo?.foto,
                 trim: trim,
-		careers: careers,
+                careers: careers,
             }, process.env.SECRET!, {
                 expiresIn: "30m"
             })
 
-            res.status(200).json({ token, careers })
+            res.status(200).json({
+                token,
+                careers,
+                name: userInfo?.nombre,
+                picture: userInfo?.foto,
+            })
         } catch (error: any) {
             console.error(error)
-            
+
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
 
@@ -56,7 +73,12 @@ class UserController extends BaseController {
     async getUser(req: CustomRequest, res: Response) {
         try {
 
-	    res.status(200).json({ "user": req.user, "careers": req.careers })
+            res.status(200).json({
+                name: req.name,
+                user: req.user,
+                careers: req.careers,
+                picture: req.picture,
+            })
 
         } catch (error: any) {
             console.error(error)
