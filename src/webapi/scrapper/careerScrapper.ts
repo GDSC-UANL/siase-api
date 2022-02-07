@@ -114,9 +114,10 @@ export class CareerScrapper extends SiaseWebScrapper {
 
             if (i % 7 == 0) {
                 let times = subject.html()!.split(/ *a<br> */g)
-                startTime = times.shift()?.replace(" ", "")!
-                endTime = times.pop()!
+                startTime = times.shift()?.trim()!
+                endTime = times.pop()!.trim()!
                 substract++
+             
                 continue;
             }
 
