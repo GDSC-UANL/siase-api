@@ -37,6 +37,9 @@ class UserController extends BaseController {
 
             let userInfo: InformacionAlumno | null = null;
 
+            if (careers == null)
+                return res.status(403).send("Usuario o contraseña incorrectos")
+
             if (careers != null && careers[0] != null) {
                 const userInfoResponse = await careerDataSource.getUserInfoResponse(careers[0], user, trim!);
                 careerScrapper.loadResponse(userInfoResponse);
@@ -56,7 +59,7 @@ class UserController extends BaseController {
             res.status(200).json({
                 nombre: userInfo?.nombre,
                 matricula: user,
-                carreras:careers,
+                carreras: careers,
                 token,
                 foto: userInfo?.foto,
             })
