@@ -48,7 +48,7 @@ class CareersController extends BaseController {
 
             const userInfo = careerScrapper.getStudentInfo()
 
-            if (userInfo == null) return res.status(400).send("An error has ocurred while gathering the information, make sure the token is still valid");
+            if (userInfo == null) return res.status(501).send("An error has ocurred while gathering the information, make sure the token is still valid");
 
             res.status(200).json(userInfo)
 
