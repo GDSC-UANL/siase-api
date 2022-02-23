@@ -46,6 +46,7 @@ class UserController extends BaseController {
                 userInfo = careerScrapper.getStudentInfo();
             }
 
+
             const token = jwt.sign({
                 user: user,
                 name: userInfo?.nombre,
