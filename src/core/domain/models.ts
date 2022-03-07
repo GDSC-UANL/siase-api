@@ -155,6 +155,7 @@ export class MateriaKardex {
     claveMateria: string = "";
     nombre: string = "";
     calificaciones: number[] = []
+    laboratorio?:string
 
     setNombreFromValue(value: string) {
         const name = value.trim()

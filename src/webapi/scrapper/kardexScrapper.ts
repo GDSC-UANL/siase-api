@@ -35,13 +35,20 @@ export class KardexScrapper extends SiaseWebScrapper {
 
             const scores = currentSubject.children().slice(KardexSubjectValues.Calificaciones)
 
+            let scoreNum = 0;
+
+
             for (let score of scores) {
+                scoreNum++;
 
                 const value = Number.parseInt(this.$(score).text())
+                const text = this.$(score).text().trim()
+                if (!text || text == ""||text == " ") continue;
 
-                if (!value) continue;
-
-                newSubject.calificaciones.push(value)
+                if (scoreNum == 7)
+                    newSubject.laboratorio = text
+                else
+                    newSubject.calificaciones.push(value)
 
             }
 
