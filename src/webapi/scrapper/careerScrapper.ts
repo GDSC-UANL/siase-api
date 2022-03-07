@@ -22,6 +22,8 @@ export class CareerScrapper extends SiaseWebScrapper {
 
             if (!urlData) continue;
 
+            console.log(urlData)
+
             parsedCarreras.push(new Carrera(urlData, name))
 
         }

@@ -28,7 +28,7 @@ export class Carrera {
 
     private getValue(data: string) {
 
-        return data.split("=").pop()?.replace(/'/g, "") || ""
+        return data?.split("=")?.pop()?.replace(/'/g, "") || ""
 
     }
 
