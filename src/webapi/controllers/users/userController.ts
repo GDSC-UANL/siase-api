@@ -50,7 +50,6 @@ class UserController extends BaseController {
             const token = jwt.sign({
                 user: user,
                 name: userInfo?.nombre,
-                picture: userInfo?.foto,
                 trim: trim,
                 careers: careers,
             }, process.env.SECRET!, {
@@ -62,7 +61,6 @@ class UserController extends BaseController {
                 matricula: user,
                 carreras: careers,
                 token,
-                foto: userInfo?.foto,
             })
         } catch (error: any) {
             console.error(error)
@@ -82,7 +80,6 @@ class UserController extends BaseController {
                 nombre: req.name,
                 matricula: req.user,
                 carreras: req.careers,
-                foto: req.picture,
             })
 
         } catch (error: any) {
