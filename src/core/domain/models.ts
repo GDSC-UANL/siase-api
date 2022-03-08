@@ -151,10 +151,10 @@ export class HorarioDetalle {
 }
 
 export class MateriaKardex {
-    semestre: number = 1;
+    semestre: string = "1";
     claveMateria: string = "";
     nombre: string = "";
-    calificaciones: number[] = []
+    calificaciones: string[] = []
     laboratorio?:string
 
     setNombreFromValue(value: string) {
@@ -167,7 +167,7 @@ export class MateriaKardex {
     }
 
     setSemestreFromvalue(value: string) {
-        this.semestre = Number.parseInt(value)
+        this.semestre = value.trim()
     }
 }
 
