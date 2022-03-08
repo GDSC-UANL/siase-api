@@ -171,7 +171,7 @@ export class MateriaKardex {
 
     setSemestreFromvalue(value: string) {
         this.semestre = Number.parseInt(value)
-        this.semestreMateria = value
+        this.semestreMateria = value.trim()
     }
 
 }
