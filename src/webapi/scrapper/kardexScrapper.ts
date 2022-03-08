@@ -47,15 +47,16 @@ export class KardexScrapper extends SiaseWebScrapper {
 
                 if (scoreNum == 7)
                     newSubject.laboratorio = text
-                else
+                else{
                     newSubject.calificaciones.push(value)
+                    newSubject.oportunidades.push(text)
+                }
 
             }
 
             kardex.materias.push(newSubject)
 
         }
-
 
         return kardex;
     }
