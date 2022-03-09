@@ -27,6 +27,7 @@ class UserController extends BaseController {
 
             const loginResponse = await userDataSource.loginUser(user, password);
 
+
             const careerScrapper = new CareerScrapper(loginResponse);
 
             const authScrapper = new AuthScrapper(loginResponse);
