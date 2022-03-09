@@ -11,7 +11,8 @@ export class SiaseNetworkDataSource {
 
         this.axios.interceptors.request.use((request) => {
             request.headers = {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                "Referer":"https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/login.htm"
             }
             request.responseType = 'arraybuffer'
             return request
