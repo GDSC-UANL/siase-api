@@ -1,3 +1,5 @@
+import { InformacionAlumno } from './../../../core/domain/models';
+import { careerDataSource } from './../../../network/careersDataSource';
 import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";
 import { BaseController, CustomRequest } from "../baseController";
@@ -25,6 +27,7 @@ class UserController extends BaseController {
 
             const loginResponse = await userDataSource.loginUser(user, password);
 
+
             const careerScrapper = new CareerScrapper(loginResponse);
 
             const authScrapper = new AuthScrapper(loginResponse);
@@ -33,18 +36,38 @@ class UserController extends BaseController {
 
             const trim = authScrapper.getTrimFromLoginResponse();
 
+            let userInfo: InformacionAlumno | null = null;
+
+            if (careers == null){
+                console.error(loginResponse)
+                return res.status(403).send("Usuario o contraseña incorrectos")
+            }
+
+            if (careers != null && careers[0] != null) {
+                const userInfoResponse = await careerDataSource.getUserInfoResponse(careers[0], user, trim!);
+                careerScrapper.loadResponse(userInfoResponse);
+                userInfo = careerScrapper.getStudentInfo();
+            }
+
+
             const token = jwt.sign({
                 user: user,
+                name: userInfo?.nombre,
                 trim: trim,
-		careers: careers,
+                careers: careers,
             }, process.env.SECRET!, {
                 expiresIn: "30m"
             })
 
-            res.status(200).json({ token, careers })
+            res.status(200).json({
+                nombre: userInfo?.nombre,
+                matricula: user,
+                carreras: careers,
+                token,
+            })
         } catch (error: any) {
             console.error(error)
-            
+
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
 
@@ -56,7 +79,11 @@ class UserController extends BaseController {
     async getUser(req: CustomRequest, res: Response) {
         try {
 
-	    res.status(200).json({ "user": req.user, "careers": req.careers })
+            res.status(200).json({
+                nombre: req.name,
+                matricula: req.user,
+                carreras: req.careers,
+            })
 
         } catch (error: any) {
             console.error(error)

@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 import { scheduleController } from './controllers/schedule/scheduleController';
 import fs from 'fs'
 import https from 'https'
+import { careersController } from './controllers/careers/careersController';
 
 const CERT_PATH = './node_modules/node_extra_ca_certs_mozilla_bundle/ca_bundle/ca_intermediate_root_bundle.pem'
 const path = require('path');
@@ -37,6 +38,7 @@ class Server {
         this.app.use("/api/user", userController.router)
         this.app.use("/api/schedules", scheduleController.router)
         this.app.use("/api/kardex", kardexController.router)
+        this.app.use("/api/careers", careersController.router)
         this.app.get("/", (req, res) => {
             res.send("SIASE API")
         })

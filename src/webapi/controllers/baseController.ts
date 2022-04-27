@@ -7,7 +7,8 @@ export interface CustomRequest extends Request<any> {
     user: string;
     trim: string;
     careers: Carrera[];
-    
+    picture: string;
+    name: string;
 }
 export abstract class BaseController {
 
@@ -37,9 +38,11 @@ export abstract class BaseController {
                 return res.status(401).send('Invalid or expired token');
 
 
+            req.name = payload.name;
             req.user = payload.user;
             req.trim = payload.trim;
             req.careers = payload.careers;
+            req.picture = payload.picture;
 
             next();
 
