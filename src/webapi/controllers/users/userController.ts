@@ -38,8 +38,10 @@ class UserController extends BaseController {
 
             let userInfo: InformacionAlumno | null = null;
 
-            if (careers == null)
+            if (careers == null){
+                console.error(loginResponse)
                 return res.status(403).send("Usuario o contraseña incorrectos")
+            }
 
             if (careers != null && careers[0] != null) {
                 const userInfoResponse = await careerDataSource.getUserInfoResponse(careers[0], user, trim!);
