@@ -49,7 +49,7 @@ class KardexController extends BaseController {
 
             if (!kardex) {
                 const error = kardexScrapper.getError();
-                return res.status(error.statusCode).send(error);
+                return res.status(error.statusCode).send(error.message);
             }
 
 
@@ -88,7 +88,7 @@ class KardexController extends BaseController {
 
             if (!kardex) {
                 const error = kardexScrapper.getError();
-                return res.status(error.statusCode).send(error);
+                return res.status(error.statusCode).send(error.message);
             }
 
             res.status(200).json(kardex)

@@ -52,7 +52,7 @@ class ScheduleController extends BaseController {
 
             if (!schedules) {
                 const error = careerScrapper.getError();
-                return res.status(error.statusCode).send(error);
+                return res.status(error.statusCode).send(error.message);
             }
 
 
@@ -106,7 +106,7 @@ class ScheduleController extends BaseController {
 
             if (!schedules) {
                 const error = careerScrapper.getError();
-                return res.status(error.statusCode).send(error);
+                return res.status(error.statusCode).send(error.message);
             }
 
             res.status(200).json(schedules)
@@ -158,7 +158,7 @@ class ScheduleController extends BaseController {
 
             if (!detail) {
                 const error = careerScrapper.getError();
-                return res.status(error.statusCode).send(error);
+                return res.status(error.statusCode).send(error.message);
             }
 
 
@@ -214,7 +214,7 @@ class ScheduleController extends BaseController {
 
             if (!detail) {
                 const error = careerScrapper.getError();
-                return res.status(error.statusCode).send(error);
+                return res.status(error.statusCode).send(error.message);
             }
 
 

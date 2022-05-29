@@ -50,7 +50,7 @@ class CareersController extends BaseController {
 
             if (userInfo == null) {
                 const error = careerScrapper.getError();
-                return res.status(error.statusCode).send(error);
+                return res.status(error.statusCode).send(error.message);
             }
 
 
