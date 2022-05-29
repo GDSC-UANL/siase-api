@@ -1,7 +1,13 @@
 import cheerio from 'cheerio'
+import { ErrorResponse } from '../models/models';
+
 
 export class SiaseWebScrapper {
 
+
+    errors = {
+
+    }
 
     private _$?: cheerio.Root
 
@@ -22,6 +28,12 @@ export class SiaseWebScrapper {
     loadResponse(html: string) {
         this._$ = cheerio.load(html)
     }
-    
+
+    getError(): ErrorResponse {
+        const regex = new RegExp(/\'(.*?)\'/g)
+        const alert = this.$("SCRIPT").last().html() ?? ""
+        const alertText = regex.exec(alert)?.pop() ?? "Ocurrió un error al obtener la información"
+        return ErrorResponse.getErrorByMessage(alertText);
+    }
 
 }

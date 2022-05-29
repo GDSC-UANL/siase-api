@@ -50,8 +50,11 @@ class ScheduleController extends BaseController {
 
             const schedules = careerScrapper.getCareerSchedules(career);
 
-            if (!schedules)
-                return res.status(501).send("An error has ocurred while gathering the information, make sure the token is still valid");
+            if (!schedules) {
+                const error = careerScrapper.getError();
+                return res.status(error.statusCode).send(error);
+            }
+
 
             res.status(200).json(schedules)
 
@@ -101,8 +104,10 @@ class ScheduleController extends BaseController {
 
             const schedules = careerScrapper.getCareerSchedules(queries);
 
-            if (!schedules)
-                return res.status(501).send("An error has ocurred while gathering the information, make sure the token is still valid");
+            if (!schedules) {
+                const error = careerScrapper.getError();
+                return res.status(error.statusCode).send(error);
+            }
 
             res.status(200).json(schedules)
 
@@ -151,8 +156,11 @@ class ScheduleController extends BaseController {
 
             const detail = careerScrapper.getScheduleDetail();
 
-            if (!detail)
-                return res.status(501).send("An error has ocurred while gathering the information, make sure the token is still valid");
+            if (!detail) {
+                const error = careerScrapper.getError();
+                return res.status(error.statusCode).send(error);
+            }
+
 
             res.status(200).json(detail)
 
@@ -204,8 +212,11 @@ class ScheduleController extends BaseController {
 
             const detail = careerScrapper.getScheduleDetail();
 
-            if (!detail)
-                return res.status(501).send("An error has ocurred while gathering the information, make sure the token is still valid");
+            if (!detail) {
+                const error = careerScrapper.getError();
+                return res.status(error.statusCode).send(error);
+            }
+
 
             res.status(200).json(detail)
 

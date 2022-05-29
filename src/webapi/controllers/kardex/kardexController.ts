@@ -47,8 +47,11 @@ class KardexController extends BaseController {
 
             const kardex = kardexScrapper.getKardex();
 
-            if (!kardex)
-                return res.status(501).send("An error has ocurred while gathering the information, make sure the token is still valid");
+            if (!kardex) {
+                const error = kardexScrapper.getError();
+                return res.status(error.statusCode).send(error);
+            }
+
 
             res.status(200).json(kardex)
 
@@ -83,8 +86,10 @@ class KardexController extends BaseController {
 
             const kardex = kardexScrapper.getKardex();
 
-            if (!kardex)
-                return res.status(501).send("An error has ocurred while gathering the information, make sure the token is still valid");
+            if (!kardex) {
+                const error = kardexScrapper.getError();
+                return res.status(error.statusCode).send(error);
+            }
 
             res.status(200).json(kardex)
 
