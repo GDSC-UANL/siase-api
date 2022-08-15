@@ -58,7 +58,7 @@ export class InformacionAlumno {
 
     private getValue(data: string) {
         const newData = data.trim();
-        const realValue = newData.split(":").pop()?.trim().replace(/\s/g," ")
+        const realValue = newData.split(":").pop()?.trim().replace(/\s/g, " ")
         return realValue
             ?.toLowerCase()
             .split(' ')
@@ -152,13 +152,13 @@ export class HorarioDetalle {
 
 export class MateriaKardex {
     semestre: number = 1;
-    semestreMateria:string = ""
+    semestreMateria: string = ""
     claveMateria: string = "";
     nombre: string = "";
     calificaciones: number[] = []
-    oportunidades:string[] = []
-    laboratorio?:string
- 
+    oportunidades: string[] = []
+    laboratorio?: string
+
 
     setNombreFromValue(value: string) {
         const name = value.trim()
@@ -199,6 +199,92 @@ export class Kardex {
     setPlanEstudiosFromValue(value: string) {
         this.planEstudios = value.split(":").pop()!.trim();
     }
+}
+
+class Campus {
+    id?: number;
+    nombre?: string;
+    latitud?: number;
+    longitud?: number;
+    edificios: Edificio[] = []
+}
+
+class Edificio {
+    id?: number;
+    nombre?: string;
+    latitud?: number;
+    longitud?: number;
+    idCampus?: number
+    tipo?: TiposEdificios
+}
+
+class Facultad extends Edificio {
+
+    claveDependencia?: string
+    salones: Salon[] = []
+    edificios: Edificio[] = []
+
+    constructor() {
+        super();
+        this.tipo = TiposEdificios.facultad
+    }
+}
+
+class EdificioSalones extends Edificio {
+    salones: Salon[] = []
+
+    constructor() {
+        super();
+        this.tipo = TiposEdificios.salones
+    }
+}
+
+
+class Salon {
+    claveDependencia?: string
+    idEdificio?: string
+    nombre?: string
+    latitud?: number;
+    longitud?: number;
+}
+
+class Cafeteria extends Edificio {
+    claveDependencia?: string
+    menu: ItemMenu[] = []
+
+    constructor() {
+        super();
+        this.tipo = TiposEdificios.cafeteria
+    }
+}
+
+class ItemMenu {
+    nombre?: string;
+    precio?: number;
+}
+
+class Gimnasio extends Edificio {
+    claveDependencia?: string
+    constructor() {
+        super();
+        this.tipo = TiposEdificios.gimnasio
+    }
+}
+
+class Estadio extends Edificio {
+    constructor() {
+        super();
+        this.tipo = TiposEdificios.estadio
+    }
+}
+
+
+enum TiposEdificios {
+    facultad,
+    cafeteria,
+    gimnasio,
+    estadio,
+    salones
 }
 
 
