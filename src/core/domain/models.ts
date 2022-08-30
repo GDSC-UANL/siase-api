@@ -279,10 +279,19 @@ class Estadio extends Edificio {
 }
 
 
+class Biblioteca extends Edificio {
+    constructor() {
+        super();
+        this.tipo = TiposEdificios.biblioteca
+    }
+}
+
+
 enum TiposEdificios {
     facultad,
     cafeteria,
     gimnasio,
+    biblioteca,
     estadio,
     salones
 }
