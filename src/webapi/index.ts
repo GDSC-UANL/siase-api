@@ -1,4 +1,5 @@
 require("module-alias/register")
+import { afisController } from '@siaseApi/webapi/controllers/afis/afisController';
 import { kardexController } from '@siaseApi/webapi/controllers/kardex/kardexController';
 import { userController } from '@siaseApi/webapi/controllers/users/userController';
 import { scheduleController } from '@siaseApi/webapi/controllers/schedule/scheduleController';
@@ -39,6 +40,7 @@ class Server {
         this.app.use("/api/schedules", scheduleController.router)
         this.app.use("/api/kardex", kardexController.router)
         this.app.use("/api/careers", careersController.router)
+        this.app.use("/api/afis", afisController.router)
         this.app.get("/", (req, res) => {
             res.send("SIASE API")
         })

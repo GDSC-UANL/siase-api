@@ -52,3 +52,5 @@ class AfisController extends BaseController {
     }
 
 }
+
+export const afisController = new AfisController();
