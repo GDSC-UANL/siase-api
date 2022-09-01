@@ -16,7 +16,7 @@ export class AfisScrapper extends SiaseWebScrapper {
 
         let index = 0
         for (let row of rows) {
-            if (index++ == 0 || index + 1 == rows.length) continue;
+            if (index++ == 0 || index == rows.length + 1) continue;
 
             const afi = new Afi();
             const infoCols = this.$(row).find("td")
