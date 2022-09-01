@@ -12,6 +12,11 @@ export class Afi {
     alumnosRegistrados?: number
     disponibles?: number;
 
+    setDescription(value?: string) {
+        if (!value) return
+        this.descripcion = value.trim()
+    }
+
     setOrganizador(value?: string) {
         if (!value) return
         this.organizador = value.trim().capitalizeFirst();

@@ -29,7 +29,7 @@ export class AfisScrapper extends SiaseWebScrapper {
             afi.setCapacidad(this.$(infoCols.get(AfiValues.capacidad)).text())
             afi.setAlumnosRegistrados(this.$(infoCols.get(AfiValues.registro)).text())
             afi.setDisponibles(this.$(infoCols.get(AfiValues.disponibles)).text())
-            afi.descripcion = this.$(infoCols.get(AfiValues.evento)).attr("title")
+            afi.setDescription(this.$(infoCols.get(AfiValues.evento)).attr("title"))
             afis.push(afi)
         }
 
