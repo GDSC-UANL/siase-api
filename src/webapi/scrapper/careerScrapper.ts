@@ -163,10 +163,14 @@ enum SubjectItemValues {
 
 enum SubjectValues {
     Tipo,
-    Grupo,
     ClaveMateria,
-    Abreviacion,
-    TipoOferta,
     Nombre,
+    Abreviacion,
+    Grupo,
+    TipoOferta,
+    FrecuenciaPresencial,
+    FrecuenciaEnLinea,
+    FrecuenciaTotla,
+    Creditos,
     Oportunidad,
 }

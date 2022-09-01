@@ -63,6 +63,7 @@ class UserController extends BaseController {
                 nombre: userInfo?.nombre,
                 matricula: user,
                 carreras: careers,
+                foto:userInfo?.foto,
                 token,
             })
         } catch (error: any) {

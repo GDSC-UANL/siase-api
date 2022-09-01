@@ -4,7 +4,6 @@
   "description": "Un rest api para consumir los datos de SIASE",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/webapi/index.js",
     "build": "tsc",
     "build-w": "tsc -w",
