@@ -40,7 +40,6 @@ export class Afi {
     setFechaHoraFin(value?: string) {
         if (!value) return
         const valueSplit = value.trim().split(" ")
-        console.log(valueSplit)
         this.fechaFin = valueSplit.shift();
         this.horaFin = valueSplit.pop();
     }
