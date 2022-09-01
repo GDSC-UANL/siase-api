@@ -1,5 +1,5 @@
 import cheerio from 'cheerio'
-import { ErrorResponse } from '../models/models';
+import { ErrorResponse } from '@siaseApi/webapi/models/models';
 
 
 export class SiaseWebScrapper {

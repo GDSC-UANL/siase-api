@@ -1,4 +1,4 @@
-import { SiaseWebScrapper } from "./webScrapper";
+import { SiaseWebScrapper } from "@siaseApi/webapi/scrapper/webScrapper";
 
 export class AuthScrapper extends SiaseWebScrapper {
 

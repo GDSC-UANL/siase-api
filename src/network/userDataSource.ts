@@ -1,6 +1,4 @@
-import { SiaseNetworkDataSource } from './siaseNetworkDataSource';
-import https from 'https'
-import iconv from 'iconv-lite'
+import { SiaseNetworkDataSource } from '@siaseApi/network/siaseNetworkDataSource';
 
 class UserDataSource extends SiaseNetworkDataSource {
 

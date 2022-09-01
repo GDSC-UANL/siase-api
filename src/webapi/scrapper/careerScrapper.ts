@@ -1,5 +1,6 @@
-import { HorarioDetalle, Materia, Carrera, Horario, InformacionAlumno } from './../../core/domain/models';
-import { SiaseWebScrapper } from './webScrapper';
+import { HorarioDetalle, Materia, Carrera, Horario } from '@siaseApi/core/domain/careers';
+import { InformacionAlumno } from '@siaseApi/core/domain/users';
+import { SiaseWebScrapper } from '@siaseApi/webapi/scrapper/webScrapper';
 export class CareerScrapper extends SiaseWebScrapper {
 
     getCareersFromLoginResponse(): Carrera[] | null {

@@ -1,7 +1,7 @@
-import { TokenPayload } from './../models/models';
+import { TokenPayload } from '@siaseApi/webapi/models/models';
 import { Request, Router } from "express";
 import jwt from 'jsonwebtoken';
-import { Carrera } from '../../core/domain/models';
+import { Carrera } from '@siaseApi/core/domain/careers';
 
 export interface CustomRequest extends Request<any> {
     user: string;
@@ -19,6 +19,8 @@ export abstract class BaseController {
     }
 
     protected abstract config(): void;
+
+
 
     async verifyToken(req: any, res: any, next: any) {
         try {

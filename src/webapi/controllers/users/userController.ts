@@ -1,11 +1,11 @@
-import { InformacionAlumno } from './../../../core/domain/models';
-import { careerDataSource } from './../../../network/careersDataSource';
-import { CareerScrapper } from '../../scrapper/careerScrapper';
+import { InformacionAlumno } from '@siaseApi/core/domain/users';
+import { careerDataSource } from '@siaseApi/network/careersDataSource';
+import { CareerScrapper } from '@siaseApi/webapi/scrapper/careerScrapper';
 import { Request, Response } from "express";
-import { BaseController, CustomRequest } from "../baseController";
-import { userDataSource } from '../../../network/userDataSource';
+import { BaseController, CustomRequest } from "@siaseApi/webapi/controllers/baseController";
+import { userDataSource } from '@siaseApi/network/userDataSource';
+import { AuthScrapper } from '@siaseApi/webapi/scrapper/authScrapper';
 import jwt from 'jsonwebtoken'
-import { AuthScrapper } from '../../scrapper/authScrapper';
 import axios from 'axios';
 
 class UserController extends BaseController {
@@ -38,7 +38,7 @@ class UserController extends BaseController {
 
             let userInfo: InformacionAlumno | null = null;
 
-            if (careers == null){
+            if (careers == null) {
                 console.error(loginResponse)
                 return res.status(403).send("Usuario o contraseña incorrectos")
             }
@@ -63,7 +63,7 @@ class UserController extends BaseController {
                 nombre: userInfo?.nombre,
                 matricula: user,
                 carreras: careers,
-                foto:userInfo?.foto,
+                foto: userInfo?.foto,
                 token,
             })
         } catch (error: any) {
