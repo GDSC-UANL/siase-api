@@ -21,6 +21,8 @@ export class AfisScrapper extends SiaseWebScrapper {
             const afi = new Afi();
             const infoCols = this.$(row).find("td")
 
+            const checkbox = this.$(infoCols.get(AfiValues.checkbox)).find("input").first()
+            afi.registrado = checkbox.is(":checked")
             afi.setOrganizador(this.$(infoCols.get(AfiValues.organizador)).text())
             afi.setArea(this.$(infoCols.get(AfiValues.area)).text())
             afi.setEvento(this.$(infoCols.get(AfiValues.evento)).text())
@@ -39,7 +41,8 @@ export class AfisScrapper extends SiaseWebScrapper {
 }
 
 enum AfiValues {
-    organizador = 1,
+    checkbox,
+    organizador ,
     area,
     evento,
     fechaInicio,

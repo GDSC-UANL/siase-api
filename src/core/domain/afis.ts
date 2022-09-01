@@ -1,5 +1,6 @@
 import "@siaseApi/core/utils/stringExtensions.ext"
 export class Afi {
+    registrado?: boolean = false
     organizador?: string
     area?: string;
     evento?: string;
