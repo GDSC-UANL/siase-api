@@ -20,6 +20,8 @@ export abstract class BaseController {
 
     protected abstract config(): void;
 
+
+
     async verifyToken(req: any, res: any, next: any) {
         try {
             res.setHeader("Content-Type", "application/json; charset=utf-8");
