@@ -4,6 +4,7 @@ import { kardexController } from '@siaseApi/webapi/controllers/kardex/kardexCont
 import { userController } from '@siaseApi/webapi/controllers/users/userController';
 import { scheduleController } from '@siaseApi/webapi/controllers/schedule/scheduleController';
 import { careersController } from '@siaseApi/webapi/controllers/careers/careersController';
+import { gradesController } from '@siaseApi/webapi/controllers/grades/gradesController';
 import express, { Application } from 'express';
 import cors from 'cors'
 import morgan from "morgan";
@@ -41,6 +42,7 @@ class Server {
         this.app.use("/api/kardex", kardexController.router)
         this.app.use("/api/careers", careersController.router)
         this.app.use("/api/afis", afisController.router)
+        this.app.use("/api/grades", gradesController.router)
         this.app.get("/", (req, res) => {
             res.send("SIASE API")
         })

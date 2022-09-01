@@ -80,10 +80,8 @@ export class Materia {
     claveMateria: string = ""
     modalidad: string = ""
     oportunidad: string = ""
-
-
-
 }
+
 export class HorarioDetalle {
     lunes: Materia[] = []
     martes: Materia[] = []

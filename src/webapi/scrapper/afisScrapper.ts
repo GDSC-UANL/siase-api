@@ -3,13 +3,17 @@ import { SiaseWebScrapper } from "@siaseApi/webapi/scrapper/webScrapper";
 
 export class AfisScrapper extends SiaseWebScrapper {
 
-    getAfis(): Afi[] {
 
+    getAfis(): Afi[] | null {
         const afis: Afi[] = []
         const tables = this.$(".TablaLink")
+
+        if (tables.length == 0) return null
+
         const afisTable = tables.first()
 
         const rows = afisTable.find("tr")
+
         let index = 0
         for (let row of rows) {
             if (index++ == 0 || index + 1 == rows.length) continue;
@@ -27,9 +31,6 @@ export class AfisScrapper extends SiaseWebScrapper {
             afi.setDisponibles(this.$(infoCols.get(AfiValues.disponibles)).text())
             afi.descripcion = this.$(infoCols.get(AfiValues.evento)).attr("title")
             afis.push(afi)
-
-
-            index++
         }
 
         return afis
