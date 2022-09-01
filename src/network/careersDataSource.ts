@@ -1,7 +1,5 @@
-import { Carrera, Horario } from '../core/domain/models';
+import { Carrera, Horario } from '../core/domain/careers';
 import { SiaseNetworkDataSource } from "./siaseNetworkDataSource";
-import https from 'https'
-import iconv from 'iconv-lite'
 class CareerDataSource extends SiaseNetworkDataSource {
 
     async getCareerSchedules(query: Carrera, user: string, trim: string): Promise<string> {

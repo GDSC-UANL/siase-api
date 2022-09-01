@@ -1,4 +1,4 @@
-import { InformacionAlumno } from './../../../core/domain/models';
+import { InformacionAlumno } from '../../../core/domain/users';
 import { careerDataSource } from './../../../network/careersDataSource';
 import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { Request, Response } from "express";

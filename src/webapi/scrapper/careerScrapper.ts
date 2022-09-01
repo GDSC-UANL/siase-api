@@ -1,4 +1,5 @@
-import { HorarioDetalle, Materia, Carrera, Horario, InformacionAlumno } from './../../core/domain/models';
+import { HorarioDetalle, Materia, Carrera, Horario } from '../../core/domain/careers';
+import { InformacionAlumno } from '../../core/domain/users';
 import { SiaseWebScrapper } from './webScrapper';
 export class CareerScrapper extends SiaseWebScrapper {
 

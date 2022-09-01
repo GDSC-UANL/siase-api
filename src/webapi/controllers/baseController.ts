@@ -1,7 +1,7 @@
 import { TokenPayload } from './../models/models';
 import { Request, Router } from "express";
 import jwt from 'jsonwebtoken';
-import { Carrera } from '../../core/domain/models';
+import { Carrera } from '../../core/domain/careers';
 
 export interface CustomRequest extends Request<any> {
     user: string;

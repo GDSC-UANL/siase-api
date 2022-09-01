@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Response } from 'express';
-import { Carrera, Horario } from '../../../core/domain/models';
+import { Carrera, Horario } from '../../../core/domain/careers';
 import { careerDataSource } from '../../../network/careersDataSource';
 import { CareerScrapper } from '../../scrapper/careerScrapper';
 import { BaseController, CustomRequest } from './../baseController';

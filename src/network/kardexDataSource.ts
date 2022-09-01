@@ -1,6 +1,5 @@
-import { Carrera } from "../core/domain/models";
+import { Carrera } from "../core/domain/careers";
 import { SiaseNetworkDataSource } from "./siaseNetworkDataSource";
-import https from 'https';
 
 class KardexDataSource extends SiaseNetworkDataSource {
 

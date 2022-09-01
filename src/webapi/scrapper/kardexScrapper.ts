@@ -1,4 +1,4 @@
-import { Kardex, MateriaKardex } from './../../core/domain/models';
+import { Kardex, MateriaKardex } from './../../core/domain/kardex';
 import { SiaseWebScrapper } from './webScrapper';
 
 export class KardexScrapper extends SiaseWebScrapper {
