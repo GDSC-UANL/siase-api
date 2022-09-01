@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { Response } from 'express';
-import { Carrera, Horario } from '../../../core/domain/careers';
-import { careerDataSource } from '../../../network/careersDataSource';
-import { CareerScrapper } from '../../scrapper/careerScrapper';
-import { BaseController, CustomRequest } from './../baseController';
+import { Horario } from '@siaseApi/core/domain/careers';
+import { careerDataSource } from '@siaseApi/network/careersDataSource';
+import { CareerScrapper } from '@siaseApi/webapi/scrapper/careerScrapper';
+import { BaseController, CustomRequest } from '@siaseApi/webapi/controllers/baseController';
 class ScheduleController extends BaseController {
 
     protected config(): void {

@@ -1,5 +1,5 @@
-import { Carrera, Horario } from '../core/domain/careers';
-import { SiaseNetworkDataSource } from "./siaseNetworkDataSource";
+import { Carrera, Horario } from '@siaseApi/core/domain/careers';
+import { SiaseNetworkDataSource } from "@siaseApi/network/siaseNetworkDataSource";
 class CareerDataSource extends SiaseNetworkDataSource {
 
     async getCareerSchedules(query: Carrera, user: string, trim: string): Promise<string> {
@@ -19,11 +19,8 @@ class CareerDataSource extends SiaseNetworkDataSource {
         const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/echalm01.htm", {
             params: formData
         })
-
-
         return response.data
     }
-
     async getUserInfoResponse(query: Carrera, user: string, trim: string): Promise<string> {
         const formData = new URLSearchParams()
 

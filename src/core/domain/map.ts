@@ -1,3 +1,4 @@
+import "@siaseApi/core/utils/stringExtensions.ext"
 class Campus {
     id?: number;
     nombre?: string;

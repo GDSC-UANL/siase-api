@@ -1,16 +1,16 @@
-import { kardexController } from './controllers/kardex/kardexController';
-import { userController } from './controllers/users/userController';
+require("module-alias/register")
+import { kardexController } from '@siaseApi/webapi/controllers/kardex/kardexController';
+import { userController } from '@siaseApi/webapi/controllers/users/userController';
+import { scheduleController } from '@siaseApi/webapi/controllers/schedule/scheduleController';
+import { careersController } from '@siaseApi/webapi/controllers/careers/careersController';
 import express, { Application } from 'express';
 import cors from 'cors'
 import morgan from "morgan";
 import dotenv from 'dotenv'
-import { scheduleController } from './controllers/schedule/scheduleController';
 import fs from 'fs'
 import https from 'https'
-import { careersController } from './controllers/careers/careersController';
-
+import path from 'path';
 const CERT_PATH = './node_modules/node_extra_ca_certs_mozilla_bundle/ca_bundle/ca_intermediate_root_bundle.pem'
-const path = require('path');
 
 class Server {
 
@@ -42,8 +42,8 @@ class Server {
         this.app.get("/", (req, res) => {
             res.send("SIASE API")
         })
-        this.app.get("/api", (req,res) => {
-            res.sendFile(path.join(__dirname+'/views/landing/index.html'));
+        this.app.get("/api", (req, res) => {
+            res.sendFile(path.join(__dirname + '/views/landing/index.html'));
         })
     }
 

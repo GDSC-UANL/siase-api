@@ -1,3 +1,5 @@
+import "@siaseApi/core/utils/stringExtensions.ext"
+
 export class MateriaKardex {
     semestreMateria: string = ""
     claveMateria: string = "";

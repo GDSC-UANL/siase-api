@@ -1,9 +1,9 @@
-import { Carrera } from "@siaseApi/core/domain/careers";
-import { SiaseNetworkDataSource } from "@siaseApi/network/siaseNetworkDataSource";
+import { SiaseNetworkDataSource } from '@siaseApi/network/siaseNetworkDataSource';
+import { Carrera } from '@siaseApi/core/domain/careers';
+class AfisDataSource extends SiaseNetworkDataSource {
 
-class KardexDataSource extends SiaseNetworkDataSource {
 
-    async getKardexResponse(query: Carrera, user: string, trim: string): Promise<string> {
+    async getAfisFromCareer(query: Carrera, user: string, trim: string): Promise<string> {
         const formData = new URLSearchParams()
 
         formData.append("HTMLUsuario", user)
@@ -17,13 +17,14 @@ class KardexDataSource extends SiaseNetworkDataSource {
         formData.append("HTMLCve_Unidad", query.claveUnidad!)
         formData.append("HTMLTipCve", "01")
 
-        const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/econkdx01.htm", {
+        const response = await this.axios.get("https://deimos.dgi.uanl.mx/cgi-bin/wspd_cgi.sh/delSavePrereg.htm", {
             params: formData
         })
 
-        return response.data;
+
+        return response.data
     }
 
 }
 
-export const kardexDataSource = new KardexDataSource();
+export const afisDataSource = new AfisDataSource()

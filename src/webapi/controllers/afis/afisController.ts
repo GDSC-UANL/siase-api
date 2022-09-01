@@ -1,19 +1,19 @@
-import { KardexScrapper } from '@siaseApi/webapi/scrapper/kardexScrapper';
-import { kardexDataSource } from '@siaseApi/network/kardexDataSource';
+import axios from "axios";
 import { Response } from "express";
 import { Carrera } from "@siaseApi/core/domain/careers";
+import { afisDataSource } from "@siaseApi/network/afisDataSource";
+import { AfisScrapper } from "@siaseApi/webapi/scrapper/afisScrapper";
 import { BaseController, CustomRequest } from "@siaseApi/webapi/controllers/baseController";
-import axios from 'axios'
-class KardexController extends BaseController {
-    protected config(): void {
 
+class AfisController extends BaseController {
+    protected config(): void {
         this.router.get("/:index",
             (req, res, next) => this.verifyToken(req, res, next),
-            (req, res) => this.getKardexByIndex(req as CustomRequest, res))
+            (req, res) => this.getCareerAfisByIndex(req as CustomRequest, res)
+        )
     }
 
-
-    private async getKardexByIndex(req: CustomRequest, res: Response) {
+    async getCareerAfisByIndex(req: CustomRequest, res: Response) {
         try {
 
             const rawIndex = req.params.index
@@ -28,18 +28,18 @@ class KardexController extends BaseController {
 
             const carrera = req.careers[index] as Carrera
 
-            const data = await kardexDataSource.getKardexResponse(carrera, req.user, req.trim);
+            const data = await afisDataSource.getAfisFromCareer(carrera, req.user, req.trim);
 
-            const kardexScrapper = new KardexScrapper(data)
+            const afisScrapper = new AfisScrapper(data)
 
-            const kardex = kardexScrapper.getKardex();
+            const afis = afisScrapper.getAfis();
 
-            if (!kardex) {
-                const error = kardexScrapper.getError();
+            if (!afis) {
+                const error = afisScrapper.getError();
                 return res.status(error.statusCode).send(error.message);
             }
 
-            res.status(200).json(kardex)
+            res.status(200).json(afis)
 
         } catch (error: any) {
             console.error(error)
@@ -52,5 +52,3 @@ class KardexController extends BaseController {
     }
 
 }
-
-export const kardexController = new KardexController();

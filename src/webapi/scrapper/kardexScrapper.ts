@@ -1,5 +1,5 @@
-import { Kardex, MateriaKardex } from './../../core/domain/kardex';
-import { SiaseWebScrapper } from './webScrapper';
+import { Kardex, MateriaKardex } from '@siaseApi/core/domain/kardex';
+import { SiaseWebScrapper } from '@siaseApi/webapi/scrapper/webScrapper';
 
 export class KardexScrapper extends SiaseWebScrapper {
 
@@ -42,11 +42,11 @@ export class KardexScrapper extends SiaseWebScrapper {
                 scoreNum++;
 
                 const text = this.$(score).text().trim()
-                if (!text || text == ""||text == " ") continue;
+                if (!text || text == "" || text == " ") continue;
 
                 if (scoreNum == 7)
                     newSubject.laboratorio = text
-                else{
+                else {
                     newSubject.oportunidades.push(text)
                 }
 

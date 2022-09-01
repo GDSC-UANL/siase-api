@@ -1,3 +1,4 @@
+import "@siaseApi/core/utils/stringExtensions.ext"
 export class InformacionAlumno {
     matricula: string = "";
     nombre: string = "";

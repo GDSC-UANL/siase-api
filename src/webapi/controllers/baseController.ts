@@ -1,7 +1,7 @@
-import { TokenPayload } from './../models/models';
+import { TokenPayload } from '@siaseApi/webapi/models/models';
 import { Request, Router } from "express";
 import jwt from 'jsonwebtoken';
-import { Carrera } from '../../core/domain/careers';
+import { Carrera } from '@siaseApi/core/domain/careers';
 
 export interface CustomRequest extends Request<any> {
     user: string;

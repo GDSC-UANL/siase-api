@@ -1,9 +1,8 @@
-import { careerDataSource } from './../../../network/careersDataSource';
-import { CustomRequest } from './../baseController';
-import { BaseController } from "../baseController";
+import { careerDataSource } from '@siaseApi/network/careersDataSource';
+import { BaseController, CustomRequest } from "@siaseApi/webapi/controllers/baseController";
 import { Response } from 'express';
+import { CareerScrapper } from '@siaseApi/webapi/scrapper/careerScrapper';
 import axios from 'axios';
-import { CareerScrapper } from '../../scrapper/careerScrapper';
 
 class CareersController extends BaseController {
     protected config(): void {
