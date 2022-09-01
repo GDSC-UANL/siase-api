@@ -25,7 +25,7 @@ export class InformacionAlumno {
         return realValue
             ?.toLowerCase()
             .split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .map(word => word.capitalizeFirst())
             .join(' ') ?? "";
 
     }

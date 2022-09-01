@@ -22,7 +22,7 @@ export class Carrera {
         }
 
         if (name)
-            this.nombre = name.charAt(0) + name.slice(1).toLowerCase()
+            this.nombre = name.trim().capitalizeFirst();
     }
 
     private getValue(data: string) {
@@ -47,8 +47,7 @@ export class Horario {
 
     constructor(career?: Carrera, name?: string, period?: string) {
         if (name) {
-            const newName = name.trim()
-            this.nombre = newName.charAt(0) + newName.slice(1).toLowerCase();
+            this.nombre = name.trim().capitalizeFirst();
         }
 
         if (career) {

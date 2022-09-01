@@ -8,7 +8,7 @@ export class MateriaKardex {
 
     setNombreFromValue(value: string) {
         const name = value.trim()
-        this.nombre = name.charAt(0) + name.slice(1).toLowerCase()
+        this.nombre = name.capitalizeFirst();
     }
 
     setClaveMateriaFromValue(value: string) {
@@ -30,14 +30,14 @@ export class Kardex {
     setNombreAlumnoFromvalue(value: string) {
         const name = value.split(":").pop()!.trim()
 
-        this.nombreAlumno = name.split(" ").map(e => e.charAt(0) + e.slice(1).toLowerCase()).join(" ")
+        this.nombreAlumno = name.split(" ").map(e => e.capitalizeFirst()).join(" ")
 
     }
 
     setCarreraFromValue(value: string) {
         const name = value.split(":").pop()!.trim()
 
-        this.carrera = name.split(" ").map(e => e.charAt(0) + e.slice(1).toLowerCase()).join(" ")
+        this.carrera = name.split(" ").map(e => e.capitalizeFirst()).join(" ")
 
     }
 
