@@ -21,6 +21,7 @@ class UserController extends BaseController {
 
     async authUser(req: Request, res: Response) {
         try {
+            console.log("HOLA")
             const password = req.body.password
 
             const user = req.body.user
