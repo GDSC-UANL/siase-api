@@ -14,6 +14,9 @@ export abstract class BaseController {
 
     router: Router = Router();
 
+    private dayInMillis = 60 * 60 * 24
+
+
     constructor() {
         this.config();
     }
@@ -53,4 +56,21 @@ export abstract class BaseController {
             return res.status(401).send('Unauhtorized Request');
         }
     }
+
+
+    async setCache(req: any, res: any, next: any, timeInDays?: number) {
+        if (req.method != "GET") {
+            res.set("Cache-control", `no-store`)
+            next();
+            return;
+        }
+
+
+        let period = timeInDays !== undefined ? this.dayInMillis * timeInDays : this.dayInMillis * 25
+
+        res.set("Cache-control", `private, max-age=${period}`)
+
+        next();
+    }
+
 }

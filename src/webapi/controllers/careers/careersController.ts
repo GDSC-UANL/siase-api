@@ -6,8 +6,14 @@ import axios from 'axios';
 
 class CareersController extends BaseController {
     protected config(): void {
-        this.router.get("/", this.verifyToken, (req, res) => this.getUserCareers(req as CustomRequest, res))
-        this.router.get("/:index", this.verifyToken, (req, res) => this.getCareerDetail(req as CustomRequest, res))
+        this.router.get("/",
+            this.verifyToken,
+            (req, res, next) => this.setCache(req, res, next),
+            (req, res) => this.getUserCareers(req as CustomRequest, res))
+        this.router.get("/:index",
+            this.verifyToken,
+            (req, res, next) => this.setCache(req, res, next),
+            (req, res) => this.getCareerDetail(req as CustomRequest, res))
 
     }
 

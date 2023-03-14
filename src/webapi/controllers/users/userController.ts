@@ -14,6 +14,7 @@ class UserController extends BaseController {
     protected config() {
         this.router.get("/",
             (req, res, next) => this.verifyToken(req, res, next),
+            (req, res, next) => this.setCache(req, res, next),
             (req, res) => this.getUser(req as CustomRequest, res))
 
         this.router.post("/", (req, res) => this.authUser(req, res))

@@ -10,11 +10,13 @@ class ScheduleController extends BaseController {
 
         this.router.get("/:index",
             (req, res, next) => this.verifyToken(req, res, next),
+            (req, res, next) => this.setCache(req, res, next),
             (req, res) => this.getSchedulesByIndex(req as CustomRequest, res)
         );
 
         this.router.get("/:index/:periodo",
             (req, res, next) => this.verifyToken(req, res, next),
+            (req, res, next) => this.setCache(req, res, next),
             (req, res) => this.getScheduleDetailByIndex(req as CustomRequest, res)
         );
     }
