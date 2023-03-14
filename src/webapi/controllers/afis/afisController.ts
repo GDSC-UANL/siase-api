@@ -9,6 +9,7 @@ class AfisController extends BaseController {
     protected config(): void {
         this.router.get("/:index",
             (req, res, next) => this.verifyToken(req, res, next),
+            (req, res, next) => this.setCache(req, res, next, 1),
             (req, res) => this.getCareerAfisByIndex(req as CustomRequest, res)
         )
     }
