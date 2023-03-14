@@ -10,13 +10,22 @@ export class CareerScrapper extends SiaseWebScrapper {
         if (form.length == 0)
             return null
 
-        const carreras = form.first().find("a")
+        const carreras = form.first().children()
 
         const parsedCarreras: Carrera[] = []
 
+        let sectionNumber = 0;
+
         for (let carrera of carreras) {
 
+
+
             const parsedCarrera = this.$(carrera);
+
+            if (parsedCarrera.is("p")) sectionNumber++
+            if (sectionNumber > 1) break;
+
+            if (!parsedCarrera.is("a")) continue;
 
             const name = parsedCarrera.text();
             const urlData = parsedCarrera.attr("href")
@@ -120,7 +129,7 @@ export class CareerScrapper extends SiaseWebScrapper {
                 startTime = times.shift()?.trim()!
                 endTime = times.pop()!.trim()!
                 substract++
-             
+
                 continue;
             }
 
