@@ -48,16 +48,11 @@ class Server {
 
 
         this.app.get("/", (req, res) => {
-            if (process.env.DEV == true.toString())
-                return res.redirect(req.baseUrl + "/api")
 
             let url = req.baseUrl;
 
-            if (url.endsWith("/")) {
-                const splitUrl = url.split("")
-                splitUrl.pop();
-                url = splitUrl.join("")
-            }
+            if (process.env.DEV == true.toString() || url.endsWith("/"))
+                return res.redirect(url + "/api")
 
             res.redirect(url + "siaseApi/api")
         })
