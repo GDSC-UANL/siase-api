@@ -48,7 +48,10 @@ class Server {
 
 
         this.app.get("/", (req, res) => {
-            res.redirect(req.baseUrl + "/api")
+            if (process.env.DEV)
+                res.redirect(req.baseUrl + "/api")
+            else
+                res.redirect(req.baseUrl + "siaseApi/api")
         })
 
 
