@@ -21,8 +21,8 @@ body {
 }
 
 .title img {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 20px;
 }
 
@@ -59,7 +59,7 @@ body {
 
 .column-1 h1 {
   font-weight: 600;
-  font-size: 70px;
+  font-size: 75px;
   margin: 0px;
 }
 
@@ -68,7 +68,7 @@ body {
   padding: 5px 10px;
   width: fit-content;
   border-radius: 7px;
-  font-size: 15px;
+  font-size: 16px;
   color: rgb(226, 226, 226);
   margin-bottom: 10px;
 }
@@ -76,8 +76,8 @@ body {
 .column-1 p {
   margin-bottom: 0px;
   color: rgb(167, 167, 167);
-  font-size: 15px;
-  line-height: 30px;
+  font-size: 18px;
+  line-height: 35px;
   margin-bottom: 20px;
 }
 
@@ -107,7 +107,6 @@ button {
 .primary {
   margin-top: 20px;
   padding: 10px 20px;
-  font-size: 14px;
   font-weight: 100;
   letter-spacing: 1px;
   cursor: pointer;
@@ -120,7 +119,6 @@ button {
 .secondary {
   margin-top: 20px;
   padding: 10px 20px;
-  font-size: 14px;
   font-weight: 100;
   letter-spacing: 1px;
   cursor: pointer;
@@ -140,6 +138,7 @@ button {
 .buttons button {
   width: 100%;
   color: rgb(221, 221, 221);
+  font-size: 18px;
   transition: filter 0.1s ease;
 }
 
@@ -153,12 +152,12 @@ button {
 }
 
 .disclaimer {
-  font-size: 11px !important;
+  font-size: 12px !important;
   color: rgb(167, 167, 167);
-  padding: 10px 10px;
+  padding: 10px 15px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1120px) {
   .title {
     flex-direction: column-reverse;
     margin-bottom: 30px;
@@ -168,6 +167,7 @@ button {
   .label {
     margin-left: auto;
     margin-right: auto;
+    font-size: 14px;
   }
 
   .container {
@@ -182,6 +182,7 @@ button {
 
   .column-1 p {
     max-width: 700px;
+    font-size: 16px;
     text-align: center;
   }
 
@@ -196,6 +197,14 @@ button {
   .buttons a {
     width: 100%;
     max-width: 300px;
+  }
+
+  .buttons button {
+    font-size: 16px;
+  }
+
+  .disclaimer {
+    font-size: 12px;
   }
 }
 
