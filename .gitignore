@@ -1,4 +1,6 @@
 build/*
-!build/webapi/views/
+!build/webapi
+build/webapi/*
+!build/webapi/views
 node_modules/
 .env

@@ -44,7 +44,7 @@ class Server {
         this.app.use("/api/afis", afisController.router)
         this.app.use("/api/grades", gradesController.router)
         this.app.get("/", (req, res) => {
-            res.send("SIASE API")
+            res.sendFile(path.join(__dirname + '/views/landing/index.html'));
         })
         this.app.get("/api", (req, res) => {
             res.sendFile(path.join(__dirname + '/views/landing/index.html'));
