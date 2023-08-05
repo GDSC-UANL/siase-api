@@ -51,7 +51,7 @@ class Server {
 
             let url = req.baseUrl;
 
-            if (process.env.DEV == true.toString() || url.endsWith("/"))
+            if (process.env.DEV == true.toString() || url.endsWith("siaseApi/"))
                 return res.redirect(url + "/api")
 
             res.redirect(url + "siaseApi/api")
