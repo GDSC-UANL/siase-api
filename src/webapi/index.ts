@@ -48,7 +48,7 @@ class Server {
 
 
         this.app.get("/", (req, res) => {
-            res.redirect("/api")
+            res.redirect("api")
         })
 
 
