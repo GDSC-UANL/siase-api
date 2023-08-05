@@ -49,12 +49,8 @@ class Server {
 
         this.app.get("/", (req, res) => {
 
-            let url = req.baseUrl;
+            res.sendFile(path.join(__dirname + '/views/landing/index.html'));
 
-            if (process.env.DEV == true.toString() || url.endsWith("siaseApi/"))
-                return res.redirect(url + "/api")
-
-            res.redirect(url + "siaseApi/api")
         })
 
 
