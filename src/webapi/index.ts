@@ -44,11 +44,11 @@ class Server {
         this.app.use("/api/afis", afisController.router)
         this.app.use("/api/grades", gradesController.router)
 
-        this.app.use('/views',express.static(__dirname + '/views/landing/'))
+        this.app.use('/views', express.static(__dirname + '/views/landing/'))
 
 
         this.app.get("/", (req, res) => {
-            res.redirect("api")
+            res.redirect(req.baseUrl + "/api")
         })
 
 
