@@ -63,7 +63,7 @@ class Server {
         const port = this.app.get('port')
 
         this.app.listen(port, () => {
-            console.log("Servidor iniciado en puerto 5000")
+            console.log("Servidor iniciado en puerto " + port)
         })
     }
 
