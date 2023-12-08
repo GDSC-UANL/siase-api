@@ -50,7 +50,6 @@ class UserController extends BaseController {
                 userInfo = careerScrapper.getStudentInfo();
             }
 
-            console.log(userInfo);
             if (!userInfo) {
                 const error = careerScrapper.getError();
                 console.error(error)
