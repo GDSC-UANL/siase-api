@@ -10,9 +10,11 @@ export class ErrorResponse {
 
 
     static sessionExpired = "Procedimiento restringido, iniciar sesion nuevamente."
+    static inactivityTime = "El tiempo de inactividad (30 minutos) excedio, iniciar sesion nuevamente."
 
     static errors = {
-        [this.sessionExpired]: new ErrorResponse(this.sessionExpired, 501)
+        [this.sessionExpired]: new ErrorResponse(this.sessionExpired, 501),
+        [this.inactivityTime]: new ErrorResponse(this.inactivityTime, 501)
     }
 
     constructor(
