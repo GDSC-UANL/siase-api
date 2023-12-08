@@ -45,11 +45,12 @@ class UserController extends BaseController {
 
             if (careers != null && careers[0] != null) {
                 const userInfoResponse = await careerDataSource.getUserInfoResponse(careers[0], user, trim!);
+                
                 careerScrapper.loadResponse(userInfoResponse);
                 userInfo = careerScrapper.getStudentInfo();
             }
 
-            
+            console.log(userInfo);
             if (!userInfo) {
                 const error = careerScrapper.getError();
                 console.error(error)
