@@ -40,7 +40,9 @@ class UserController extends BaseController {
             let userInfo: InformacionAlumno | null = null;
 
             if (careers == null) {
-                return res.status(403).send("Usuario o contraseña incorrectos")
+                const error = careerScrapper.getError();
+                console.error(error)
+                return res.status(error.statusCode).send(error.message);
             }
 
             if (careers != null && careers[0] != null) {
