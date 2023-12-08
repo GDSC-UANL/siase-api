@@ -49,6 +49,13 @@ class UserController extends BaseController {
                 userInfo = careerScrapper.getStudentInfo();
             }
 
+            
+            if (!userInfo) {
+                const error = careerScrapper.getError();
+                console.error(error)
+                return res.status(error.statusCode).send(error.message);
+            }
+
 
             const token = jwt.sign({
                 user: user,
