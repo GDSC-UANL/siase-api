@@ -22,7 +22,6 @@ class UserController extends BaseController {
 
     async authUser(req: Request, res: Response) {
         try {
-            console.log("HOLA")
             const password = req.body.password
 
             const user = req.body.user
@@ -41,7 +40,6 @@ class UserController extends BaseController {
             let userInfo: InformacionAlumno | null = null;
 
             if (careers == null) {
-                console.error(loginResponse)
                 return res.status(403).send("Usuario o contraseña incorrectos")
             }
 

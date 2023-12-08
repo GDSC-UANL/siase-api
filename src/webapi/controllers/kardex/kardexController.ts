@@ -37,6 +37,7 @@ class KardexController extends BaseController {
 
             if (!kardex) {
                 const error = kardexScrapper.getError();
+                console.error(error)
                 return res.status(error.statusCode).send(error.message);
             }
 

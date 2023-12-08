@@ -45,6 +45,7 @@ class ScheduleController extends BaseController {
 
             if (!schedules) {
                 const error = careerScrapper.getError();
+                console.error(error)
                 return res.status(error.statusCode).send(error.message);
             }
 

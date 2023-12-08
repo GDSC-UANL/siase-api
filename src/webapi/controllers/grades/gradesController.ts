@@ -45,6 +45,7 @@ class GradesController extends BaseController {
 
             if (!periodos) {
                 const error = gradesScrapper.getError();
+                console.error(error)
                 return res.status(error.statusCode).send(error.message);
             }
 

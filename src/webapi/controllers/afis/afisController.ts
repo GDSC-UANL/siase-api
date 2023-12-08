@@ -37,6 +37,7 @@ class AfisController extends BaseController {
 
             if (!afis) {
                 const error = afisScrapper.getError();
+                console.error(error)
                 return res.status(error.statusCode).send(error.message);
             }
 
