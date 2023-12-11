@@ -1,12 +1,10 @@
 import { InformacionAlumno } from '@siaseApi/core/domain/users';
-import { careerDataSource } from '@siaseApi/network/careersDataSource';
-import { CareerScrapper } from '@siaseApi/webapi/scrapper/careerScrapper';
 import { Request, Response } from "express";
 import { BaseController, CustomRequest } from "@siaseApi/webapi/controllers/baseController";
 import { userDataSource } from '@siaseApi/network/userDataSource';
-import { AuthScrapper } from '@siaseApi/webapi/scrapper/authScrapper';
 import jwt from 'jsonwebtoken'
 import axios from 'axios';
+import { ErrorResponse } from '@siaseApi/network/exceptions/errorResponse';
 
 class UserController extends BaseController {
 
@@ -28,42 +26,18 @@ class UserController extends BaseController {
 
             const loginResponse = await userDataSource.loginUser(user, password);
 
-
-            const careerScrapper = new CareerScrapper(loginResponse);
-
-            const authScrapper = new AuthScrapper(loginResponse);
-
-            const careers = careerScrapper.getCareersFromLoginResponse()
-
-            const trim = authScrapper.getTrimFromLoginResponse();
-
-            let userInfo: InformacionAlumno | null = null;
-
-            if (careers == null) {
-                const error = careerScrapper.getError();
-                console.error(error)
-                return res.status(error.statusCode).send(error.message);
-            }
-
-            if (careers != null && careers[0] != null) {
-                const userInfoResponse = await careerDataSource.getUserInfoResponse(careers[0], user, trim!);
-                
-                careerScrapper.loadResponse(userInfoResponse);
-                userInfo = careerScrapper.getStudentInfo();
-            }
-
-            if (!userInfo) {
-                const error = careerScrapper.getError();
-                console.error(error)
-                return res.status(error.statusCode).send(error.message);
-            }
+            const userInfo: InformacionAlumno = await userDataSource.getUserInfo(
+                loginResponse.carreras![0],
+                user,
+                loginResponse.trim!
+            );
 
 
             const token = jwt.sign({
                 user: user,
                 name: userInfo?.nombre,
-                trim: trim,
-                careers: careers,
+                trim: loginResponse.trim,
+                careers: loginResponse.carreras,
             }, process.env.SECRET!, {
                 expiresIn: "30m"
             })
@@ -71,7 +45,7 @@ class UserController extends BaseController {
             res.status(200).json({
                 nombre: userInfo?.nombre,
                 matricula: user,
-                carreras: careers,
+                carreras: loginResponse.carreras,
                 foto: userInfo?.foto,
                 token,
             })
@@ -80,6 +54,9 @@ class UserController extends BaseController {
 
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
+
+            if (error instanceof ErrorResponse)
+                return res.status(error.statusCode).send(error.message)
 
             res.status(500).send(error.message)
         }

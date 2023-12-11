@@ -1,8 +1,8 @@
-import { careerDataSource } from '@siaseApi/network/careersDataSource';
 import { BaseController, CustomRequest } from "@siaseApi/webapi/controllers/baseController";
 import { Response } from 'express';
-import { CareerScrapper } from '@siaseApi/webapi/scrapper/careerScrapper';
 import axios from 'axios';
+import { userDataSource } from '@siaseApi/network/userDataSource';
+import { ErrorResponse } from '@siaseApi/network/exceptions/errorResponse';
 
 class CareersController extends BaseController {
     protected config(): void {
@@ -47,26 +47,18 @@ class CareersController extends BaseController {
 
             const careers = req.careers[index]
 
-            const userInfoResponse = await careerDataSource.getUserInfoResponse(careers, req.user, req.trim);
+            const userInfoResponse = await userDataSource.getUserInfo(careers, req.user, req.trim);
 
-            const careerScrapper = new CareerScrapper(userInfoResponse)
-
-            const userInfo = careerScrapper.getStudentInfo()
-
-            if (userInfo == null) {
-                const error = careerScrapper.getError();
-                console.error(error)
-                return res.status(error.statusCode).send(error.message);
-            }
-
-
-            res.status(200).json(userInfo)
+            res.status(200).json(userInfoResponse)
 
         } catch (error: any) {
             console.error(error)
 
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
+
+            if (error instanceof ErrorResponse)
+                return res.status(error.statusCode).send(error.message)
 
             res.status(500).send(error.message)
         }

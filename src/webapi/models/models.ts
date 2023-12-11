@@ -6,29 +6,3 @@ export interface TokenPayload {
     name: string
 }
 
-export class ErrorResponse {
-
-
-    static sessionExpired = "Procedimiento restringido, iniciar sesion nuevamente."
-    static inactivityTime = "El tiempo de inactividad (30 minutos) excedio, iniciar sesion nuevamente."
-
-    static errors = {
-        [this.sessionExpired]: new ErrorResponse(this.sessionExpired, 501),
-        [this.inactivityTime]: new ErrorResponse(this.inactivityTime, 501)
-    }
-
-    constructor(
-        public message = "Ocurrió un error al obtener la información",
-        public statusCode = 500
-    ) {
-
-    }
-
-    static getErrorByMessage(message: string) {
-
-        const error = this.errors[message]
-
-        return error ?? new ErrorResponse(message)
-
-    }
-}

@@ -1,4 +1,5 @@
 import "@siaseApi/core/utils/stringExtensions.ext"
+import { Carrera } from "./careers";
 export class InformacionAlumno {
     matricula: string = "";
     nombre: string = "";
@@ -34,6 +35,10 @@ export class InformacionAlumno {
     }
 }
 
+export class AuthResponse {
+    carreras?: Carrera[]
+    trim?: string
+}
 
 
 enum InformacionAlumnoValues {

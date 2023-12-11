@@ -1,12 +1,10 @@
 import axios from "axios";
 import { Response } from "express";
 import { Carrera } from "@siaseApi/core/domain/careers";
-import { afisDataSource } from "@siaseApi/network/afisDataSource";
-import { AfisScrapper } from "@siaseApi/webapi/scrapper/afisScrapper";
 import { BaseController, CustomRequest } from "@siaseApi/webapi/controllers/baseController";
 import { gradesDataSource } from "@siaseApi/network/gradesDataSource";
-import { GradesScrapper } from "@siaseApi/webapi/scrapper/gradesScrapper";
 import { PeriodoCalificaciones } from "@siaseApi/core/domain/grades";
+import { ErrorResponse } from "@siaseApi/network/exceptions/errorResponse";
 
 class GradesController extends BaseController {
     protected config(): void {
@@ -39,23 +37,17 @@ class GradesController extends BaseController {
             const carrera = req.careers[index] as Carrera
 
             const data = await gradesDataSource.getGradesPeriods(carrera, req.user, req.trim);
-            const gradesScrapper = new GradesScrapper(data)
 
-            const periodos = gradesScrapper.getPeriodos(carrera);
-
-            if (!periodos) {
-                const error = gradesScrapper.getError();
-                console.error(error)
-                return res.status(error.statusCode).send(error.message);
-            }
-
-            res.status(200).json(periodos)
+            res.status(200).json(data)
 
         } catch (error: any) {
             console.error(error)
 
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
+
+            if (error instanceof ErrorResponse)
+                return res.status(error.statusCode).send(error.message)
 
             res.status(500).send(error.message)
         }
@@ -84,22 +76,17 @@ class GradesController extends BaseController {
             periodoCalificacion.periodo = periodo
 
             const data = await gradesDataSource.getGradesDetail(periodoCalificacion, req.user, req.trim);
-            const gradesScrapper = new GradesScrapper(data)
 
-            const calificaciones = gradesScrapper.getGradesDetail();
-
-            if (!calificaciones) {
-                const error = gradesScrapper.getError();
-                return res.status(error.statusCode).send(error.message);
-            }
-
-            res.status(200).json(calificaciones)
+            res.status(200).json(data)
 
         } catch (error: any) {
             console.error(error)
 
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
+
+            if (error instanceof ErrorResponse)
+                return res.status(error.statusCode).send(error.message)
 
             res.status(500).send(error.message)
         }

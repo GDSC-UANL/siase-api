@@ -2,8 +2,8 @@ import axios from 'axios';
 import { Response } from 'express';
 import { Horario } from '@siaseApi/core/domain/careers';
 import { careerDataSource } from '@siaseApi/network/careersDataSource';
-import { CareerScrapper } from '@siaseApi/webapi/scrapper/careerScrapper';
 import { BaseController, CustomRequest } from '@siaseApi/webapi/controllers/baseController';
+import { ErrorResponse } from '@siaseApi/network/exceptions/errorResponse';
 class ScheduleController extends BaseController {
 
     protected config(): void {
@@ -39,18 +39,7 @@ class ScheduleController extends BaseController {
 
             const data = await careerDataSource.getCareerSchedules(career, req.user, req.trim);
 
-            const careerScrapper = new CareerScrapper(data);
-
-            const schedules = careerScrapper.getCareerSchedules(career);
-
-            if (!schedules) {
-                const error = careerScrapper.getError();
-                console.error(error)
-                return res.status(error.statusCode).send(error.message);
-            }
-
-
-            res.status(200).json(schedules)
+            res.status(200).json(data)
 
         } catch (error: any) {
 
@@ -58,6 +47,9 @@ class ScheduleController extends BaseController {
 
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
+
+            if (error instanceof ErrorResponse)
+                return res.status(error.statusCode).send(error.message)
 
             res.status(500).send(error.message)
 
@@ -94,23 +86,17 @@ class ScheduleController extends BaseController {
 
             const data = await careerDataSource.getScheduleDetail(horario, req.user, req.trim);
 
-            const careerScrapper = new CareerScrapper(data);
-
-            const detail = careerScrapper.getScheduleDetail();
-
-            if (!detail) {
-                const error = careerScrapper.getError();
-                return res.status(error.statusCode).send(error.message);
-            }
-
-
-            res.status(200).json(detail)
+            res.status(200).json(data)
 
         } catch (error) {
             console.error(error);
 
             if (axios.isAxiosError(error))
                 return res.status(503).send("SIASE no funciona")
+
+
+            if (error instanceof ErrorResponse)
+                return res.status(error.statusCode).send(error.message)
 
             res.sendStatus(500);
         }

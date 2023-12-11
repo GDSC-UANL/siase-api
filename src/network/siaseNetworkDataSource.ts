@@ -1,5 +1,6 @@
 import iconv from 'iconv-lite';
 import axios from "axios";
+import { ErrorResponse } from './exceptions/errorResponse';
 
 export class SiaseNetworkDataSource {
     protected axios = axios.create({
@@ -31,5 +32,11 @@ export class SiaseNetworkDataSource {
         })
     }
 
+    getError($:cheerio.Root): ErrorResponse {
+        const regex = new RegExp(/\'(.*?)\'/g)
+        const alert = $("SCRIPT").last().html() ?? ""
+        const alertText = regex.exec(alert)?.pop() ?? "Ocurrió un error al obtener la información"
+        return ErrorResponse.getErrorByMessage(alertText);
+    }
 
 }
