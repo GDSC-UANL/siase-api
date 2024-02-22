@@ -24,10 +24,7 @@ export class Afi {
     alumnosRegistrados?: number
     disponibles?: number;
 
-    asistencia = false;
-    eventoOficial = false;
-    numEventoOficial?: number
-    periodoEscolar?: string
+
 
     setDescription(value?: string) {
         if (!value) return
@@ -98,30 +95,6 @@ export class Afi {
         this.disponibles = numericVal
     }
 
-    setNumEventoOficial(value?: string) {
-        if (!value) return
-
-        const numericVal = Number.parseInt(value)
-
-        if (Number.isNaN(numericVal)) return
-
-        this.numEventoOficial = numericVal
-    }
-
-    setAsistencia(value?: string) {
-        if (!value) return
-        this.asistencia = value == "Si"
-    }
-
-    setEventoOficial(value?: string) {
-        if (!value) return
-        this.eventoOficial = value == "Si"
-    }
-
-    setPeriodoEscolar(value?: string) {
-        if (!value) return
-        this.periodoEscolar = value.trim().capitalizeFirst();
-    }
 
 }
 
